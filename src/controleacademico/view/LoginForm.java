@@ -202,7 +202,7 @@ public class LoginForm extends javax.swing.JFrame {
         } else {
             if (users instanceof Administrador) {
                 //new AdminForm((Administrador) users).setVisible(true);
-                new AdminPainel().setVisible(true);
+                new AdminPainelMain().setVisible(true);
             } else if (users instanceof Professor) {
                 //new ProfessorForm((Professor) users).setVisible(true);
                 new ProfessorPainel().setVisible(true);
