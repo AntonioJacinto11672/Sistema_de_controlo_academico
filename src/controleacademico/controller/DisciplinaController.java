@@ -12,19 +12,39 @@ import controleacademico.model.Disciplina;
  * @author Double
  */
 public class DisciplinaController {
-    private ArrayList <Disciplina> disciplina = new ArrayList<>();
-    
-    public boolean saveDisciplina(Disciplina disc) {
-        if(disc != null){
+
+    private static ArrayList<Disciplina> disciplina = new ArrayList<>();
+
+    public static boolean saveDisciplina(Disciplina disc) {
+        if (disc != null) {
             disciplina.add(disc);
             return true;
         } else {
             return false;
         }
     }
-    
-    public ArrayList<Disciplina> listaTodasDisciplina(){
+
+    public static ArrayList<Disciplina> listaTodasDisciplina() {
         return disciplina;
     }
+
+    public static int newIdDisciplina() {
+        return disciplina.size() + 1;
+    }
+
+    public static Disciplina getDisciplinaById(int id) {
+        return disciplina.stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
     
+    public static boolean RemoveDisciplina(int id){
+        boolean result = disciplina.removeIf(p -> p.getId() == id);
+        if(result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

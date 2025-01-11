@@ -19,6 +19,10 @@ public class Disciplina {
         this.ementa = ementa;
     }
 
+    public Disciplina() {
+    }
+    
+
     public int getId() {
         return id;
     }

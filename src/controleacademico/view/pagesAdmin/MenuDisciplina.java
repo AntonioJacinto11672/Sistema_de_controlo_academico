@@ -4,6 +4,10 @@
  */
 package controleacademico.view.pagesAdmin;
 
+import controleacademico.model.Disciplina;
+import controleacademico.ControleAcademico;
+import controleacademico.controller.DisciplinaController;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
@@ -17,11 +21,35 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
     /**
      * Creates new form Disciplina
      */
+    DisciplinaController DisciController = new DisciplinaController();
+    ControleAcademico ca = new ControleAcademico();
+
     public MenuDisciplina() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
+        ExibirInformacoes();
+    }
+
+    private void ExibirInformacoes() {
+
+        ArrayList<Disciplina> disciPlinaData = DisciplinaController.listaTodasDisciplina();
+
+        System.out.print("Inicializou o Metodo");
+
+        for (int i = 0; i < disciPlinaData.size(); i++) {
+            jtbDisciplina.setValueAt("", i, 0);
+            jtbDisciplina.setValueAt("", i, 1);
+            System.out.print("Aqui no 1 " + disciPlinaData.get(i).getNome());
+
+        }
+        for (int i = 0; i < disciPlinaData.size() && disciPlinaData.get(i) != null; i++) {
+            jtbDisciplina.setValueAt(disciPlinaData.get(i).getId(), i, 0);
+            jtbDisciplina.setValueAt(disciPlinaData.get(i).getNome(), i, 1);
+            jtbDisciplina.setValueAt(disciPlinaData.get(i).getEmenta(), i, 2);
+            System.out.print("Aqui no 2 " + disciPlinaData.get(i).getNome());
+        }
     }
 
     /**
@@ -145,7 +173,206 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
         jtbDisciplina.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 94), 1, true));
         jtbDisciplina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
                 "id", "Nome", "Ementa"
@@ -185,8 +412,18 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
         DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
 
         Object[] dados = {tbDisciplina.getRowCount() + 1, lbNome.getText(), lbEmenta.getText()};
-        tbDisciplina.addRow(dados);
-        JOptionPane.showMessageDialog(null, "Ok Clicou");
+        //tbDisciplina.addRow(dados);
+        Disciplina disciplinaModel = new Disciplina();
+        disciplinaModel.setId(DisciplinaController.newIdDisciplina());
+        disciplinaModel.setNome(lbNome.getText());
+        disciplinaModel.setEmenta(lbEmenta.getText());
+
+        if (DisciplinaController.saveDisciplina(disciplinaModel)) {
+            ExibirInformacoes();
+            JOptionPane.showMessageDialog(null, "Disciplina Cadastrada Com Sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Disciplina Não Cadastrada!");
+        }
 
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -194,8 +431,17 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         if (jtbDisciplina.getSelectedRow() != -1) {
+             int confirm = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "Confirmação", JOptionPane.YES_NO_OPTION);
             DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
-            tbDisciplina.removeRow((jtbDisciplina.getSelectedRow()));
+            //tbDisciplina.removeRow((jtbDisciplina.getSelectedRow()));
+             if (confirm == JOptionPane.YES_OPTION) {
+                int id = (int) tbDisciplina.getValueAt( jtbDisciplina.getSelectedRow(), 0);
+               if(DisciplinaController.RemoveDisciplina(id)) {
+                 tbDisciplina.removeRow( jtbDisciplina.getSelectedRow());
+               } else {
+                   JOptionPane.showMessageDialog(null, "Disciplina excluida Com Sucesso!");
+               } 
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Seleciona um Produto para excluir");
 
@@ -206,10 +452,20 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (jtbDisciplina.getSelectedRow() != -1) {
             DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
-            tbDisciplina.removeRow((jtbDisciplina.getSelectedRow()));
-            jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
-            jtbDisciplina.setValueAt(lbEmenta.getText(), jtbDisciplina.getSelectedRow(), 2);
-            
+            //tbDisciplina.removeRow((jtbDisciplina.getSelectedRow()));
+            //jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
+            //jtbDisciplina.setValueAt(lbEmenta.getText(), jtbDisciplina.getSelectedRow(), 2);
+            int id = (int) tbDisciplina.getValueAt(jtbDisciplina.getSelectedRow(), 0);
+            Disciplina disciplinaById = DisciplinaController.getDisciplinaById(id);
+
+            if (disciplinaById != null) {
+                disciplinaById.setNome(lbNome.getText());
+                disciplinaById.setEmenta(lbEmenta.getText());
+                jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
+                jtbDisciplina.setValueAt(lbEmenta.getText(), jtbDisciplina.getSelectedRow(), 2);
+                JOptionPane.showMessageDialog(null, "Atualizado Com Sucesso");
+            }
+
         } else {
             JOptionPane.showMessageDialog(null, "Seleciona um Produto para excluir");
         }

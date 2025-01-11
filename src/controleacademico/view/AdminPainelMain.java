@@ -50,7 +50,6 @@ public class AdminPainelMain extends javax.swing.JFrame {
         menuProfessor = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        lbSair = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -76,7 +75,8 @@ public class AdminPainelMain extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
+        setTitle("Sistema de Controlo Académico");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(40, 40, 40));
@@ -152,17 +152,6 @@ public class AdminPainelMain extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(40, 40, 40));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbSair.setForeground(new java.awt.Color(255, 51, 51));
-        lbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sair.png"))); // NOI18N
-        lbSair.setText("Sair");
-        lbSair.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbSairMouseClicked(evt);
-            }
-        });
-        jPanel9.add(lbSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -212,7 +201,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
         jLabel9.setText("Sistema de Controlo Académico");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 50));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 50));
 
         jPanel7.setBackground(new java.awt.Color(230, 230, 230));
 
@@ -227,7 +216,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(307, 307, 307)
                 .addComponent(lbTitleMain)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +226,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 680, 40));
+        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 690, 40));
 
         jPanel3.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -437,11 +426,6 @@ public class AdminPainelMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lbSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSairMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_lbSairMouseClicked
-
     private void menuHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHomeMouseClicked
         // TODO add your handling code here:
         //Menu1 menu1 = new Menu1();
@@ -577,7 +561,6 @@ public class AdminPainelMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JLabel lbSair;
     private javax.swing.JLabel lbTitleMain;
     private javax.swing.JPanel menuDisciplina;
     private javax.swing.JPanel menuHome;

@@ -6,6 +6,7 @@ package controleacademico;
 
 import controleacademico.model.Administrador;
 import controleacademico.model.Aluno;
+import controleacademico.model.Disciplina;
 import controleacademico.model.Professor;
 import controleacademico.model.User;
 import controleacademico.view.LoginForm;
@@ -19,6 +20,7 @@ import java.util.Date;
 public class ControleAcademico {
 
     private static ArrayList<User> users = new ArrayList<>();
+    private static ArrayList<Disciplina> disciplina = new ArrayList<>();
 
     /**
      * @param args the command line arguments
@@ -51,8 +53,8 @@ public class ControleAcademico {
                 .orElse(null);
     }
     
-   
 
+  
     public static boolean adicionarUsuario(User usuario) {
         if(usuario != null) {
             users.add(usuario);
@@ -62,4 +64,10 @@ public class ControleAcademico {
             return false;
         }
     }
+  
+      /*  Disciplinas */
+    
+   
+
+    
 }
