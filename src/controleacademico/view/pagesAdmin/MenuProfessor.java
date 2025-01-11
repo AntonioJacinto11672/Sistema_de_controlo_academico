@@ -11,6 +11,7 @@ import controleacademico.controller.DisciplinaController;
 import controleacademico.controller.ProfessorController;
 import controleacademico.controller.UsuarioController;
 import controleacademico.model.Professor;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -36,25 +37,27 @@ public class MenuProfessor extends javax.swing.JInternalFrame {
         ExibirInformacoes();
     }
 
+    
     private void ExibirInformacoes() {
         ArrayList<Professor> professorData = UsuarioController.listarProfessores();
+        DefaultTableModel tbProfessor = (DefaultTableModel) jtbProfessor.getModel();
 
-        for (int i = 0; i < professorData.size(); i++) {
-            jtbProfessor.setValueAt("", i, 0);
-            jtbProfessor.setValueAt("", i, 1);
-            jtbProfessor.setValueAt("", i, 2);
-            jtbProfessor.setValueAt("", i, 3);
-            jtbProfessor.setValueAt("", i, 4);
-            System.out.print("Aqui no 1 " + professorData.get(i).getNome());
+        SimpleDateFormat formatarDateSImple = new SimpleDateFormat("dd/MM/yyyy");
+        
+        //String novaDate = formatarDateSImple.format(dataNascimento);
+        // Limpa todas as linhas existentes
+        tbProfessor.setRowCount(0);
 
-        }
-        for (int i = 0; i < professorData.size() && professorData.get(i) != null; i++) {
-            jtbProfessor.setValueAt(professorData.get(i).getId(), i, 0);
-            jtbProfessor.setValueAt(professorData.get(i).getNome(), i, 1);
-            jtbProfessor.setValueAt(professorData.get(i).getCargo(), i, 2);
-            jtbProfessor.setValueAt(professorData.get(i).getUserName(), i, 3);
-            jtbProfessor.setValueAt(professorData.get(i).getDataNascimento(), i, 4);
-            System.out.print("Aqui no 2 " + professorData.get(i).getNome());
+        // Adiciona os dados filtrados ou todos os dados
+        for (Professor professor : professorData) {
+            tbProfessor.addRow(new Object[]{
+                professor.getId(),
+                professor.getNome(),
+                professor.getCargo(),
+                professor.getUserName(),
+                formatarDateSImple.format(professor.getDataNascimento()),
+                
+            });
         }
     }
 
@@ -356,7 +359,7 @@ public class MenuProfessor extends javax.swing.JInternalFrame {
 
     private void jtbProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProfessorMouseClicked
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jtbProfessorMouseClicked
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed

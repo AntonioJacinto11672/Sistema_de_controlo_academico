@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/view/pagesAdmin/MenuDisciplina.java</file>
-            <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/controller/DisciplinaController.java</file>
+            <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/model/Disciplina.java</file>
+            <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/model/Turma.java</file>
+            <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/model/Administrador.java</file>
             <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/view/AdminPainelMain.java</file>
-            <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/view/CadastrarUtilizador.java</file>
-            <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/view/LoginForm.java</file>
+            <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/model/Professor.java</file>
+            <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/view/pagesAdmin/MenuTurma.java</file>
+            <file>file:/C:/Users/Double/Documents/NetBeansProjects/ControleAcademico/src/controleacademico/controller/TurmaController.java</file>
         </group>
     </open-files>
 </project-private>

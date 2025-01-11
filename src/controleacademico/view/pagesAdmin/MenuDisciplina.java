@@ -36,10 +36,20 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
     private void ExibirInformacoes() {
 
         ArrayList<Disciplina> disciPlinaData = DisciplinaController.listaTodasDisciplina();
-
+        DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
+        
         System.out.print("Inicializou o Metodo");
+        tbDisciplina.setRowCount(0);
 
-        for (int i = 0; i < disciPlinaData.size(); i++) {
+        // Adiciona os dados filtrados ou todos os dados
+        for (Disciplina disciplina1 : disciPlinaData) {
+            tbDisciplina.addRow(new Object[]{
+                disciplina1.getId(),
+                disciplina1.getNome(),
+                disciplina1.getEmenta()                
+            });
+        }
+        /*for (int i = 0; i < disciPlinaData.size(); i++) {
             jtbDisciplina.setValueAt("", i, 0);
             jtbDisciplina.setValueAt("", i, 1);
             System.out.print("Aqui no 1 " + disciPlinaData.get(i).getNome());
@@ -50,7 +60,7 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
             jtbDisciplina.setValueAt(disciPlinaData.get(i).getNome(), i, 1);
             jtbDisciplina.setValueAt(disciPlinaData.get(i).getEmenta(), i, 2);
             System.out.print("Aqui no 2 " + disciPlinaData.get(i).getNome());
-        }
+        }*/
     }
 
     /**
@@ -99,7 +109,7 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
             }
         });
 
-        btnDelete1.setBackground(new java.awt.Color(0, 102, 94));
+        btnDelete1.setBackground(new java.awt.Color(255, 51, 51));
         btnDelete1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnDelete1.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete1.setText("Excluir");
@@ -462,18 +472,18 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
         try {
             if (jtbDisciplina.getSelectedRow() != -1) {
                 DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
-                
+
                 //tbDisciplina.removeRow((jtbDisciplina.getSelectedRow()));
                 //jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
                 //jtbDisciplina.setValueAt(lbEmenta.getText(), jtbDisciplina.getSelectedRow(), 2);
                 int id = (int) tbDisciplina.getValueAt(jtbDisciplina.getSelectedRow(), 0);
                 Disciplina disciplinaById = DisciplinaController.getDisciplinaById(id);
-                
+
                 if (disciplinaById != null) {
                     DisciplinaController.validarCamposLogin(lbNome.getText(), lbEmenta.getText());
                     disciplinaById.setNome(lbNome.getText());
                     disciplinaById.setEmenta(lbEmenta.getText());
-                    
+
                     jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
                     jtbDisciplina.setValueAt(lbEmenta.getText(), jtbDisciplina.getSelectedRow(), 2);
                     JOptionPane.showMessageDialog(null, "Atualizado Com Sucesso");

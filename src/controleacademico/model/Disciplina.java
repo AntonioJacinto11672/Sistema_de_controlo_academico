@@ -47,5 +47,8 @@ public class Disciplina {
         this.ementa = ementa;
     }
     
-    
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 }

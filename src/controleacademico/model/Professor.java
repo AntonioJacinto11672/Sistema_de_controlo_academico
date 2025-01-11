@@ -4,18 +4,19 @@
  */
 package controleacademico.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  *
  * @author Double
  */
-public class Professor extends User  {
+public class Professor extends User {
 
     private String cargo;
     private Date dataNascimento;
 
-    public Professor(int id, String Nome,String cargo,Date dataNascimento, String userName, String password, String role) {
+    public Professor(int id, String Nome, String cargo, Date dataNascimento, String userName, String password, String role) {
         super(id, Nome, userName, password, role);
         this.cargo = cargo;
         this.dataNascimento = dataNascimento;
@@ -25,7 +26,6 @@ public class Professor extends User  {
         super(0, null, null, null, null);
     }
 
-    
     public String getCargo() {
         return cargo;
     }
@@ -35,20 +35,17 @@ public class Professor extends User  {
     }
 
     public Date getDataNascimento() {
+
         return dataNascimento;
     }
 
     public void setDataNascimento(Date dataNascimento) {
+
         this.dataNascimento = dataNascimento;
     }
-    
-    
-   
 
-   
-    
-    
-
-       
-    
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 }

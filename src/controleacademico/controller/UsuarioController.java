@@ -106,4 +106,18 @@ public class UsuarioController {
         }
         return resultados;
     }
+
+    public static Professor pesquisarProfessorByNameAndId(String nome, int id) {
+        User userP = users.stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .orElse(null);
+        if (userP instanceof Professor) {
+            Professor resultProfessor = new Professor(userP.getId(), userP.getNome(), ((Professor) userP).getCargo(), ((Professor) userP).getDataNascimento(), userP.getUserName(), userP.getPassword(), userP.getRole());
+            return resultProfessor;
+        } else {
+            return null;
+        }
+    }
+
 }

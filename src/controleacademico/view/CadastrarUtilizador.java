@@ -55,7 +55,6 @@ public class CadastrarUtilizador extends javax.swing.JFrame {
         tfdNomeUsuario = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        btnClose = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jlbBack = new javax.swing.JLabel();
@@ -64,7 +63,8 @@ public class CadastrarUtilizador extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
+        setTitle("Sistema de Controlo Académico - Criar Conta");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Nome");
@@ -127,21 +127,13 @@ public class CadastrarUtilizador extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 102, 94));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fechar.png"))); // NOI18N
-        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCloseMouseClicked(evt);
-            }
-        });
-        jPanel1.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, -1, -1));
-
         jLabel1.setFont(new java.awt.Font("Bookman Old Style", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Criar Conta");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 198, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 110, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/male-user-add_25347.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
         jlbBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/seta-esquerda (4).png"))); // NOI18N
         jlbBack.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -234,13 +226,15 @@ public class CadastrarUtilizador extends javax.swing.JFrame {
                     boolean result = UsuarioController.adicionarUsuario(professorModel);
                     if (result) {
                         JOptionPane.showMessageDialog(null, "Usuario Criado com sucesso!");
+
                         tfdCargo.setText("");
                         tfdNome.setText("");
                         tfdNomeUsuario.setText("");
                         jpfPassoword.setText("");
                         jpfPasswordConfirm.setText("");
                         spDate.setValue(new Date());
-
+                        new LoginForm().setVisible(true);
+                        this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario Não cadastrado!");
                     }
@@ -279,11 +273,6 @@ public class CadastrarUtilizador extends javax.swing.JFrame {
     private void tfdNomeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdNomeUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdNomeUsuarioActionPerformed
-
-    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btnCloseMouseClicked
 
     private void jlbBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbBackMouseClicked
         // TODO add your handling code here:
@@ -327,7 +316,6 @@ public class CadastrarUtilizador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnClose;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cbxRole;
     private javax.swing.JLabel jLabel1;

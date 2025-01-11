@@ -6,29 +6,31 @@ package controleacademico.model;
 
 import Exceptions.TurmaLotadaException;
 import java.util.ArrayList;
+import controleacademico.model.Aluno;
+import controleacademico.model.Disciplina;
+import controleacademico.model.Professor;
 
 /**
  *
  * @author Double
  */
-public class Turma {
-    
+public class TurmaModel {
+
     private int id;
     private Disciplina disciplina;
     private Professor professor;
     private int capacidade;
     private ArrayList<Aluno> alunos;
 
-    public Turma(int id, Disciplina disciplina, Professor professor, int capacidade) {
+    public TurmaModel(int id, Disciplina disciplina, Professor professor, int capacidade) {
         this.id = id;
         this.disciplina = disciplina;
         this.professor = professor;
         this.capacidade = capacidade;
         this.alunos = new ArrayList<>();
     }
-    
-    public Turma() {
-        
+
+    public TurmaModel() {
     }
 
     public int getId() {
@@ -77,4 +79,5 @@ public class Turma {
         }
         alunos.add(aluno);
     }
+
 }
