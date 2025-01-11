@@ -4,13 +4,12 @@
  */
 package controleacademico.view;
 
-import controleacademico.ControleAcademico;
-import controleacademico.controller.ProfessorController;
+import Exceptions.CredenciaisInvalidasException;
+import controleacademico.controller.UsuarioController;
 import controleacademico.model.User;
 import controleacademico.model.Professor;
 import controleacademico.model.Aluno;
 import controleacademico.model.Administrador;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -193,13 +192,11 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        String nomeUsusario = tfdUsername.getText();
-        String senha = new String(tfdPassword.getPassword());
-        User users = ControleAcademico.searchUser(nomeUsusario, senha);
+        try {
+            String nomeUsusario = tfdUsername.getText();
+            String senha = new String(tfdPassword.getPassword());
+            User users = UsuarioController.autenticar(nomeUsusario, senha);
 
-        if (users == null) {
-            JOptionPane.showMessageDialog(null, "Usuarío ou senha invalida");
-        } else {
             if (users instanceof Administrador) {
                 //new AdminForm((Administrador) users).setVisible(true);
                 new AdminPainelMain().setVisible(true);
@@ -212,8 +209,11 @@ public class LoginForm extends javax.swing.JFrame {
             }
             this.dispose();
 
+        } catch (CredenciaisInvalidasException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de Login", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
+
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:

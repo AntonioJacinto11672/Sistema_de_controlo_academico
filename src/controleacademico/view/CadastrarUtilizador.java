@@ -7,6 +7,7 @@ package controleacademico.view;
 import controleacademico.ControleAcademico;
 import controleacademico.controller.AlunoController;
 import controleacademico.controller.ProfessorController;
+import controleacademico.controller.UsuarioController;
 import controleacademico.model.Professor;
 import controleacademico.model.Aluno;
 import controleacademico.model.User;
@@ -213,24 +214,24 @@ public class CadastrarUtilizador extends javax.swing.JFrame {
         char[] password1 = jpfPassoword.getPassword();
         char[] password2 = jpfPasswordConfirm.getPassword();
 
-        String userName = tfdNome.getText() + "" + professor.newId();
+        String userName = tfdNome.getText() + "" + UsuarioController.newIdUser();
         String password = new String(password1);
         String passwordConform = new String(password2);
-        User usersAc = ControleAcademico.searchUserName(tfdNomeUsuario.getText());
+        User usersAc = UsuarioController.searchUserName(tfdNomeUsuario.getText());
 
         professorModel.setNome(tfdNome.getText());
         professorModel.setDataNascimento(dataNascimento1);
         professorModel.setCargo(tfdCargo.getText());
-        professorModel.setId(professor.newId());
+        professorModel.setId(UsuarioController.newIdUser());
         professorModel.setUserName(tfdNomeUsuario.getText());
         professorModel.setPassword(passwordConform);
 
         if (password.equals(passwordConform)) {
 
-            //User usersAcade = ControleAcademico.searchUserName(professorModel.getUserName());
+            //User usersAcade = UsuarioController.searchUserName(professorModel.getUserName());
             if (usersAc == null) {
                 if (role.equals("Professor")) {
-                    boolean result = ControleAcademico.adicionarUsuario(professorModel);
+                    boolean result = UsuarioController.adicionarUsuario(professorModel);
                     if (result) {
                         JOptionPane.showMessageDialog(null, "Usuario Criado com sucesso!");
                         tfdCargo.setText("");
@@ -249,7 +250,7 @@ public class CadastrarUtilizador extends javax.swing.JFrame {
                     AlunoModel.setId(professor.newId());
                     AlunoModel.setUserName(tfdNomeUsuario.getText());
                     AlunoModel.setPassword(passwordConform);
-                    boolean result = ControleAcademico.adicionarUsuario(AlunoModel);
+                    boolean result = UsuarioController.adicionarUsuario(AlunoModel);
                     if (result) {
                         JOptionPane.showMessageDialog(null, "Usuario Criado com sucesso!");
                         tfdCargo.setText("");

@@ -68,4 +68,8 @@ public class User {
         this.role = role;
     }
     
+    public void validateUser(){
+        
+    }
+    
 }

@@ -4,6 +4,7 @@
  */
 package controleacademico.view.pagesAdmin;
 
+import Exceptions.CredenciaisInvalidasException;
 import controleacademico.model.Disciplina;
 import controleacademico.ControleAcademico;
 import controleacademico.controller.DisciplinaController;
@@ -409,20 +410,28 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
+        try {
+            DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
 
-        Object[] dados = {tbDisciplina.getRowCount() + 1, lbNome.getText(), lbEmenta.getText()};
-        //tbDisciplina.addRow(dados);
-        Disciplina disciplinaModel = new Disciplina();
-        disciplinaModel.setId(DisciplinaController.newIdDisciplina());
-        disciplinaModel.setNome(lbNome.getText());
-        disciplinaModel.setEmenta(lbEmenta.getText());
+            //Object[] dados = {tbDisciplina.getRowCount() + 1, lbNome.getText(), lbEmenta.getText()};
+            //tbDisciplina.addRow(dados);
+            Disciplina disciplinaModel = new Disciplina();
+            disciplinaModel.setId(DisciplinaController.newIdDisciplina());
+            disciplinaModel.setNome(lbNome.getText());
+            disciplinaModel.setEmenta(lbEmenta.getText());
 
-        if (DisciplinaController.saveDisciplina(disciplinaModel)) {
-            ExibirInformacoes();
-            JOptionPane.showMessageDialog(null, "Disciplina Cadastrada Com Sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Disciplina Não Cadastrada!");
+            DisciplinaController.autenticar(disciplinaModel.getNome(), disciplinaModel.getEmenta());
+
+            if (DisciplinaController.saveDisciplina(disciplinaModel)) {
+                lbNome.setText("");
+                lbEmenta.setText("");
+                ExibirInformacoes();
+                JOptionPane.showMessageDialog(null, "Disciplina Cadastrada Com Sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Disciplina Não Cadastrada!");
+            }
+        } catch (CredenciaisInvalidasException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro na Disciplina", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -431,16 +440,16 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         if (jtbDisciplina.getSelectedRow() != -1) {
-             int confirm = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            int confirm = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "Confirmação", JOptionPane.YES_NO_OPTION);
             DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
             //tbDisciplina.removeRow((jtbDisciplina.getSelectedRow()));
-             if (confirm == JOptionPane.YES_OPTION) {
-                int id = (int) tbDisciplina.getValueAt( jtbDisciplina.getSelectedRow(), 0);
-               if(DisciplinaController.RemoveDisciplina(id)) {
-                 tbDisciplina.removeRow( jtbDisciplina.getSelectedRow());
-               } else {
-                   JOptionPane.showMessageDialog(null, "Disciplina excluida Com Sucesso!");
-               } 
+            if (confirm == JOptionPane.YES_OPTION) {
+                int id = (int) tbDisciplina.getValueAt(jtbDisciplina.getSelectedRow(), 0);
+                if (DisciplinaController.RemoveDisciplina(id)) {
+                    tbDisciplina.removeRow(jtbDisciplina.getSelectedRow());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Disciplina excluida Com Sucesso!");
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleciona um Produto para excluir");
@@ -450,24 +459,31 @@ public class MenuDisciplina extends javax.swing.JInternalFrame {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-        if (jtbDisciplina.getSelectedRow() != -1) {
-            DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
-            //tbDisciplina.removeRow((jtbDisciplina.getSelectedRow()));
-            //jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
-            //jtbDisciplina.setValueAt(lbEmenta.getText(), jtbDisciplina.getSelectedRow(), 2);
-            int id = (int) tbDisciplina.getValueAt(jtbDisciplina.getSelectedRow(), 0);
-            Disciplina disciplinaById = DisciplinaController.getDisciplinaById(id);
+        try {
+            if (jtbDisciplina.getSelectedRow() != -1) {
+                DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
+                
+                //tbDisciplina.removeRow((jtbDisciplina.getSelectedRow()));
+                //jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
+                //jtbDisciplina.setValueAt(lbEmenta.getText(), jtbDisciplina.getSelectedRow(), 2);
+                int id = (int) tbDisciplina.getValueAt(jtbDisciplina.getSelectedRow(), 0);
+                Disciplina disciplinaById = DisciplinaController.getDisciplinaById(id);
+                
+                if (disciplinaById != null) {
+                    DisciplinaController.validarCamposLogin(lbNome.getText(), lbEmenta.getText());
+                    disciplinaById.setNome(lbNome.getText());
+                    disciplinaById.setEmenta(lbEmenta.getText());
+                    
+                    jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
+                    jtbDisciplina.setValueAt(lbEmenta.getText(), jtbDisciplina.getSelectedRow(), 2);
+                    JOptionPane.showMessageDialog(null, "Atualizado Com Sucesso");
+                }
 
-            if (disciplinaById != null) {
-                disciplinaById.setNome(lbNome.getText());
-                disciplinaById.setEmenta(lbEmenta.getText());
-                jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
-                jtbDisciplina.setValueAt(lbEmenta.getText(), jtbDisciplina.getSelectedRow(), 2);
-                JOptionPane.showMessageDialog(null, "Atualizado Com Sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleciona um Produto para Atualizar");
             }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleciona um Produto para excluir");
+        } catch (CredenciaisInvalidasException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro na Disciplina", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
