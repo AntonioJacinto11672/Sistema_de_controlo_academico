@@ -28,24 +28,7 @@ public class TurmaController {
     public static boolean adicionarTurma(TurmaModel turma) {
         if (turma != null) {
             turmas.add(turma);
-            TurmaModel turmas = new TurmaModel();
-
             //System.out.println(turmas.size());
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    //Adicionar Turma 
-    public static boolean saveAlunoInturma(Aluno aluno, int idTurma) throws TurmaLotadaException {
-        int index = idTurma - 1;
-        System.out.println("Index " + index);
-        if (turmas.get(index).getAlunos().size() >= turmas.get(index).getCapacidade()) {
-            throw new TurmaLotadaException("A turma está cheia.");
-        }
-        if (aluno != null && idTurma > 0) {
-            turmas.get(index).getAlunos().add(aluno);
             return true;
         } else {
             return false;
@@ -54,16 +37,6 @@ public class TurmaController {
 
     public static ArrayList<TurmaModel> listaTodasTurma() {
         return turmas;
-    }
-
-    public static ArrayList<TurmaModel> listaTodasTurmaVerificarAluno(Aluno aluno) {
-        if (aluno != null) {
-            return turmas.stream().filter(turma -> turma.getAlunos().stream().noneMatch(alunoF -> alunoF.getId() == aluno.getId()))
-                    .collect(Collectors.toCollection(ArrayList::new));
-        } else {
-            return null;
-        }
-
     }
 
     public static int newIdTurma() {
@@ -102,18 +75,6 @@ public class TurmaController {
 
         if (result) {
             throw new CredenciaisInvalidasException("A Turma Com Disciplina já está cadastrada.");
-        }
-
-    }
-
-    //Relação turma e aluno
-    public static void alunoMatriculado(Aluno alunoM, int idTurma) throws TurmaLotadaException {
-        if (alunoM == null) {
-            throw new TurmaLotadaException("Aluno Desconhecido");
-        }
-        boolean valid = turmas.stream().anyMatch(p -> p.getAlunos().equals(alunoM) && p.getId() == idTurma);
-        if (valid) {
-            throw new TurmaLotadaException("Já estais nessa turma.");
         }
 
     }

@@ -43,12 +43,12 @@ public class AdminPainelMain extends javax.swing.JFrame {
         
         
         User usuarioLogado = UsuarioLogadoController.getUsuarioLogado();
-        System.out.println("User" + usuarioLogado.getNome());
+        //System.out.println("User" + usuarioLogado.getNome());
         if (UsuarioLogadoController.isUsuarioLogado()) {
             lbUserLogged.setText("Hello, "+usuarioLogado.getNome());
-            System.out.println("Usuario Logado");
+            //System.out.println("Usuario Logado");
         } else {
-            System.out.println("Usuario Erro de novo" + UsuarioLogadoController.isUsuarioLogado());
+            //System.out.println("Usuario Erro de novo" + UsuarioLogadoController.isUsuarioLogado());
 
         }
         //UsuarioLogadoController.getUsuarioLogado();

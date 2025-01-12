@@ -7,9 +7,11 @@ package controleacademico.view.pagesAluno;
 import Exceptions.CredenciaisInvalidasException;
 import Exceptions.TurmaLotadaException;
 import controleacademico.model.Disciplina;
+import controleacademico.model.RendimentoEscolar;
 import controleacademico.model.TurmaModel;
 import controleacademico.ControleAcademico;
 import controleacademico.controller.DisciplinaController;
+import controleacademico.controller.RendimentoEscolarController;
 import controleacademico.controller.UsuarioController;
 import controleacademico.controller.TurmaController;
 import controleacademico.controller.UsuarioLogadoController;
@@ -39,12 +41,13 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
         ExibirInformacoes();
 
-        
     }
 
-  private void ExibirInformacoes() {
+    private void ExibirInformacoes() {
 
-        ArrayList<TurmaModel> TurmaData = TurmaController.listaTodasTurma();
+        //ArrayList<TurmaModel> TurmaData = TurmaController.listaTodasTurma();
+        Aluno usuarioLogado = (Aluno) UsuarioLogadoController.getUsuarioLogado();
+        ArrayList<TurmaModel> TurmaData = RendimentoEscolarController.obterTurmasNaoMatriculadas(usuarioLogado);
         DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
 
         System.out.print("Inicializou o Metodo");
@@ -374,13 +377,13 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtbTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbTurmaMouseClicked
-     
+
     }//GEN-LAST:event_jtbTurmaMouseClicked
 
     private void btnMatricularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatricularActionPerformed
         // TODO add your handling code here:
-        try {
 
+        try {
             DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
             if (jtbTurma.getSelectedRow() != -1) {
                 int id = (int) tbTurma.getValueAt(jtbTurma.getSelectedRow(), 0);
@@ -389,12 +392,17 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
                     User usuarioLogado = (Aluno) UsuarioLogadoController.getUsuarioLogado();
                     if (UsuarioLogadoController.isUsuarioLogado()) {
                         Aluno alunoData = new Aluno(usuarioLogado.getId(), usuarioLogado.getNome(), usuarioLogado.getUserName(), usuarioLogado.getPassword(), "Aluno");
-                        TurmaController.alunoMatriculado(alunoData, id);
-                        boolean res = TurmaController.saveAlunoInturma(alunoData, id);
+                        //TurmaController.alunoMatriculado(alunoData, id);
+                        //boolean res = TurmaController.saveAlunoInturma(alunoData, id);
                         //System.out.println("Usuario Logado");
+                        RendimentoEscolar RendimentoModal = new RendimentoEscolar();
+                        RendimentoModal.setAluno(alunoData);
+                        RendimentoModal.setTurma(turmaById);
+                        boolean res = RendimentoEscolarController.saveRendimentoEscolar(turmaById, RendimentoModal);
+                        System.out.println("id TUrma fora " + turmaById.getId());
                         if (res) {
                             ExibirInformacoes();
-                            JOptionPane.showMessageDialog(null, "Foiste Matriculado a  turma: " + turmaById.getDisciplina().getNome());
+                            JOptionPane.showMessageDialog(null, "Foste Matriculado a  turma: " + turmaById.getDisciplina().getNome());
                         } else {
                             JOptionPane.showMessageDialog(null, "Matricula Sem Sucesso");
 
@@ -408,8 +416,9 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Seleciona uma Turma para Fazer a Matricula");
             }
         } catch (TurmaLotadaException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro na Turma", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro no Aluno", JOptionPane.ERROR_MESSAGE);
         }
+
 
     }//GEN-LAST:event_btnMatricularActionPerformed
 

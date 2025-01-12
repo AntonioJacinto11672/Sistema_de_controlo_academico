@@ -29,11 +29,6 @@ public class DisciplinaController {
         }
     }
 
-    public static void carregarDisciplina() {
-        disciplina.add(new Disciplina(1, "Matématica", "Algebrá e Logaritmo"));
-        disciplina.add(new Disciplina(1, "Ciência da Computação", "Programação Java"));
-    }
-
     public static ArrayList<Disciplina> listaTodasDisciplina() {
         return disciplina;
     }

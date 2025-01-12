@@ -474,7 +474,7 @@ public class MenuTurma extends javax.swing.JInternalFrame {
 
             Professor professor1 = UsuarioController.pesquisarProfessorByNameAndId(textoProfessor, numeroProfessorConvertido);
             Disciplina disciplina1 = DisciplinaController.pesquisarDisciplinaByNameAndId(textoDisciplina, numeroDisciplinaConvertido);
-            System.out.println("Professor nome " + textoProfessor);
+            //System.out.println("Professor nome " + textoProfessor);
             if (professor1 == null) {
                 throw new IllegalArgumentException("Professor  Desconhecida.");
             } else if (disciplina1 == null) {
@@ -482,7 +482,7 @@ public class MenuTurma extends javax.swing.JInternalFrame {
             }
 
             TurmaController.autenticar(disciplina1);
-            System.out.println(" Professor: " + professor1.getNome());
+            //System.out.println(" Professor: " + professor1.getNome());
 
             TurmaModel turmaModel = new TurmaModel();
             turmaModel.setId(TurmaController.newIdTurma());

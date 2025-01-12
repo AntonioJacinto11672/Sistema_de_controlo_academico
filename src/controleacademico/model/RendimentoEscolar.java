@@ -10,14 +10,14 @@ package controleacademico.model;
  */
 public class RendimentoEscolar {
 
-    private Turma turma;
+    private TurmaModel turma;
     private Aluno aluno;
     private float notaProva1;
     private float notaProva2;
     private int[] trabalhos;
     private float[] notasTrabalhos;
 
-    public RendimentoEscolar(Turma turma, Aluno aluno, float notaProva1, float notaProva2, int[] trabalhos, float[] notasTrabalhos) {
+    public RendimentoEscolar(TurmaModel turma, Aluno aluno, float notaProva1, float notaProva2, int[] trabalhos, float[] notasTrabalhos) {
         this.turma = turma;
         this.aluno = aluno;
         this.notaProva1 = notaProva1;
@@ -26,11 +26,14 @@ public class RendimentoEscolar {
         this.notasTrabalhos = notasTrabalhos;
     }
 
-    public Turma getTurma() {
+    public RendimentoEscolar() {
+    }
+
+    public TurmaModel getTurma() {
         return turma;
     }
 
-    public void setTurma(Turma turma) {
+    public void setTurma(TurmaModel turma) {
         this.turma = turma;
     }
 
