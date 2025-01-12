@@ -504,7 +504,7 @@ public class MenuTurma extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 
         } catch (CredenciaisInvalidasException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro na Disciplina", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro na Turma", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -531,59 +531,68 @@ public class MenuTurma extends javax.swing.JInternalFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         // TODO add your handling code here:
+        try {
+            DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
+            if (jtbTurma.getSelectedRow() != -1) {
+                int id = (int) tbTurma.getValueAt(jtbTurma.getSelectedRow(), 0);
+                TurmaModel turmaById = TurmaController.getTurmaById(id);
+                if (turmaById != null) {
+                    String disciplina = (String) cbxDisciplina.getSelectedItem();
+                    String professor = (String) cbxProfessor.getSelectedItem();
 
-        DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
-        if (jtbTurma.getSelectedRow() != -1) {
-            int id = (int) tbTurma.getValueAt(jtbTurma.getSelectedRow(), 0);
-            TurmaModel turmaById = TurmaController.getTurmaById(id);
-            if (turmaById != null) {
-                String disciplina = (String) cbxDisciplina.getSelectedItem();
-                String professor = (String) cbxProfessor.getSelectedItem();
+                    int capacidade = (int) jspCapacidade.getValue();
+                    //nt capacidade = Integer.parseInt(capacidadeN);
+                    //System.out.println("Professor " + professor);
+                    //System.out.println("Disciplina" + disciplina);
 
-                int capacidade = (int) jspCapacidade.getValue();
-                //nt capacidade = Integer.parseInt(capacidadeN);
-                //System.out.println("Professor " + professor);
-                //System.out.println("Disciplina" + disciplina);
+                    if (disciplina == null || professor == null) {
+                        throw new IllegalArgumentException("Selecione uma disciplina e um professor.");
+                    }
+                    /*Separar Disciplina */
 
-                if (disciplina == null || professor == null) {
-                    throw new IllegalArgumentException("Selecione uma disciplina e um professor.");
+                    //System.out.println("Sem separação" + disciplina);
+                    String[] partesDisciplina = disciplina.split("-");
+                    String numeroDisciplina = partesDisciplina[0];
+                    String textoDisciplina = partesDisciplina[1];
+                    int numeroDisciplinaConvertido = Integer.parseInt(numeroDisciplina);
+
+                    //Professor
+                    String[] partesProfessor = professor.split("-");
+                    String numeroProfessor = partesProfessor[0];
+                    String textoProfessor = partesProfessor[1];
+                    int numeroProfessorConvertido = Integer.parseInt(numeroProfessor);
+
+                    Professor professor1 = UsuarioController.pesquisarProfessorByNameAndId(textoProfessor, numeroProfessorConvertido);
+                    Disciplina disciplina1 = DisciplinaController.pesquisarDisciplinaByNameAndId(textoDisciplina, numeroDisciplinaConvertido);
+                    System.out.println("Professor nome " + textoProfessor);
+                    if (professor1 == null) {
+                        throw new IllegalArgumentException("Professor  Desconhecida.");
+                    } else if (disciplina1 == null) {
+                        throw new IllegalArgumentException(" Disciplina Desconhecida.");
+                    }
+                    //TurmaController.autenticar(disciplina1);
+                    TurmaController.autenticarAtualiação(disciplina1, id);
+
+                    turmaById.setCapacidade(capacidade);
+                    turmaById.setProfessor(professor1);
+                    turmaById.setDisciplina(disciplina1);
+                    //jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
+                    jtbTurma.setValueAt(disciplina1.getId() + "-" + disciplina1.getNome(), jtbTurma.getSelectedRow(), 1);
+                    jtbTurma.setValueAt(professor1.getId() + "-" + professor1.getNome(), jtbTurma.getSelectedRow(), 2);
+                    jtbTurma.setValueAt(capacidade, jtbTurma.getSelectedRow(), 3);
+
+                    JOptionPane.showMessageDialog(null, "Atualizado Com Sucesso");
                 }
-                /*Separar Disciplina */
-
-                //System.out.println("Sem separação" + disciplina);
-                String[] partesDisciplina = disciplina.split("-");
-                String numeroDisciplina = partesDisciplina[0];
-                String textoDisciplina = partesDisciplina[1];
-                int numeroDisciplinaConvertido = Integer.parseInt(numeroDisciplina);
-
-                //Professor
-                String[] partesProfessor = professor.split("-");
-                String numeroProfessor = partesProfessor[0];
-                String textoProfessor = partesProfessor[1];
-                int numeroProfessorConvertido = Integer.parseInt(numeroProfessor);
-
-                Professor professor1 = UsuarioController.pesquisarProfessorByNameAndId(textoProfessor, numeroProfessorConvertido);
-                Disciplina disciplina1 = DisciplinaController.pesquisarDisciplinaByNameAndId(textoDisciplina, numeroDisciplinaConvertido);
-                System.out.println("Professor nome " + textoProfessor);
-                if (professor1 == null) {
-                    throw new IllegalArgumentException("Professor  Desconhecida.");
-                } else if (disciplina1 == null) {
-                    throw new IllegalArgumentException(" Disciplina Desconhecida.");
-                }
-
-                turmaById.setCapacidade(capacidade);
-                turmaById.setProfessor(professor1);
-                turmaById.setDisciplina(disciplina1);
-                //jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
-                jtbTurma.setValueAt(disciplina1.getId() + "-" + disciplina1.getNome(), jtbTurma.getSelectedRow(), 1);
-                jtbTurma.setValueAt(professor1.getId() + "-" + professor1.getNome(), jtbTurma.getSelectedRow(), 2);
-                jtbTurma.setValueAt(capacidade, jtbTurma.getSelectedRow(), 3);
-
-                JOptionPane.showMessageDialog(null, "Atualizado Com Sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleciona um Produto para Atualizar");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleciona um Produto para Atualizar");
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
+        } catch (CredenciaisInvalidasException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro na Turma", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void jtbTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbTurmaMouseClicked

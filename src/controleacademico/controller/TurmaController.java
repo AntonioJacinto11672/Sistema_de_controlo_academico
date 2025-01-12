@@ -60,5 +60,15 @@ public class TurmaController {
         }
 
     }
+    
+     public static void autenticarAtualiação(Disciplina disciplina, int idTurma) throws CredenciaisInvalidasException {
+        boolean result = turmas.stream()
+                .anyMatch(u -> u.getDisciplina().equals(disciplina) && u.getId() != idTurma);
+        
+        if (result) {
+            throw new CredenciaisInvalidasException("A Turma Com Disciplina já está cadastrada.");
+        }
+
+    }
 
 }
