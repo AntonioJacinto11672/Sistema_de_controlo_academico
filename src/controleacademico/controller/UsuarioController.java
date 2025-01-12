@@ -44,7 +44,7 @@ public class UsuarioController {
     public static boolean adicionarUsuario(User usuario) {
         if (usuario != null) {
             users.add(usuario);
-            System.out.println(users.size());
+            //System.out.println(users.size());
             return true;
         } else {
             return false;
@@ -108,8 +108,9 @@ public class UsuarioController {
     }
 
     public static Professor pesquisarProfessorByNameAndId(String nome, int id) {
+        //System.out.println("Professor nome no backend: " + nome);
         User userP = users.stream()
-                .filter(p -> p.getId() == id)
+                .filter(p -> (p.getId() == id ) && (p.getNome().toLowerCase().contains(nome.toLowerCase())))
                 .findFirst()
                 .orElse(null);
         if (userP instanceof Professor) {

@@ -44,8 +44,5 @@ public class Professor extends User {
         this.dataNascimento = dataNascimento;
     }
 
-    @Override
-    public String toString() {
-        return this.getNome();
-    }
+    
 }

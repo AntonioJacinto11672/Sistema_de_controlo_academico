@@ -35,11 +35,12 @@ public class MenuTurma extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
         ExibirInformacoes();
 
-        JComboBox<Disciplina> cbDisciplina = new JComboBox<>(DisciplinaController.listaTodasDisciplina().toArray(new Disciplina[0]));
+        //JComboBox<Disciplina> cbDisciplina = new JComboBox<>(DisciplinaController.listaTodasDisciplina().toArray(new Disciplina[0]));
         // Carregar disciplinas
         DefaultComboBoxModel<String> modeloDisciplinas = new DefaultComboBoxModel<>();
         for (Disciplina d : DisciplinaController.listaTodasDisciplina()) {
-            modeloDisciplinas.addElement(d.getId() + "-" + d.toString());
+            modeloDisciplinas.addElement(d.getId() + "-" + d.getNome());
+            cbxDisciplina.addItem(d.getNome());
         }
         cbxDisciplina.setModel(modeloDisciplinas);
         //cbxDisciplina.setModel(modeloDisciplinas);
@@ -47,7 +48,7 @@ public class MenuTurma extends javax.swing.JInternalFrame {
         // Carregar professores
         DefaultComboBoxModel<String> modeloProfessores = new DefaultComboBoxModel<>();
         for (Professor p : UsuarioController.listarProfessores()) {
-            modeloProfessores.addElement(p.getId() + "-" + p.toString());
+            modeloProfessores.addElement(p.getId() + "-" + p.getNome());
         }
         cbxProfessor.setModel(modeloProfessores);
     }
@@ -64,8 +65,8 @@ public class MenuTurma extends javax.swing.JInternalFrame {
         for (TurmaModel turma : TurmaData) {
             tbTurma.addRow(new Object[]{
                 turma.getId(),
-                turma.getDisciplina().getNome(),
-                turma.getProfessor().getNome(),
+                turma.getDisciplina().getId() + "-" + turma.getDisciplina().getNome(),
+                turma.getProfessor().getId() + "-" + turma.getProfessor().getNome(),
                 turma.getCapacidade()
             });
         }
@@ -466,16 +467,18 @@ public class MenuTurma extends javax.swing.JInternalFrame {
             int numeroDisciplinaConvertido = Integer.parseInt(numeroDisciplina);
 
             //Professor
-            String[] partesProfessor = disciplina.split("-");
+            String[] partesProfessor = professor.split("-");
             String numeroProfessor = partesProfessor[0];
             String textoProfessor = partesProfessor[1];
             int numeroProfessorConvertido = Integer.parseInt(numeroProfessor);
 
             Professor professor1 = UsuarioController.pesquisarProfessorByNameAndId(textoProfessor, numeroProfessorConvertido);
             Disciplina disciplina1 = DisciplinaController.pesquisarDisciplinaByNameAndId(textoDisciplina, numeroDisciplinaConvertido);
-
-            if (professor1 == null || disciplina1 == null) {
-                throw new IllegalArgumentException("Professor ou Disciplina Desconhecida.");
+            System.out.println("Professor nome " + textoProfessor);
+            if (professor1 == null) {
+                throw new IllegalArgumentException("Professor  Desconhecida.");
+            } else if (disciplina1 == null) {
+                throw new IllegalArgumentException(" Disciplina Desconhecida.");
             }
 
             TurmaController.autenticar(disciplina1);
@@ -499,8 +502,9 @@ public class MenuTurma extends javax.swing.JInternalFrame {
             }
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
         } catch (CredenciaisInvalidasException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro na Turma", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro na Disciplina", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -533,7 +537,49 @@ public class MenuTurma extends javax.swing.JInternalFrame {
             int id = (int) tbTurma.getValueAt(jtbTurma.getSelectedRow(), 0);
             TurmaModel turmaById = TurmaController.getTurmaById(id);
             if (turmaById != null) {
+                String disciplina = (String) cbxDisciplina.getSelectedItem();
+                String professor = (String) cbxProfessor.getSelectedItem();
 
+                int capacidade = (int) jspCapacidade.getValue();
+                //nt capacidade = Integer.parseInt(capacidadeN);
+                //System.out.println("Professor " + professor);
+                //System.out.println("Disciplina" + disciplina);
+
+                if (disciplina == null || professor == null) {
+                    throw new IllegalArgumentException("Selecione uma disciplina e um professor.");
+                }
+                /*Separar Disciplina */
+
+                //System.out.println("Sem separação" + disciplina);
+                String[] partesDisciplina = disciplina.split("-");
+                String numeroDisciplina = partesDisciplina[0];
+                String textoDisciplina = partesDisciplina[1];
+                int numeroDisciplinaConvertido = Integer.parseInt(numeroDisciplina);
+
+                //Professor
+                String[] partesProfessor = professor.split("-");
+                String numeroProfessor = partesProfessor[0];
+                String textoProfessor = partesProfessor[1];
+                int numeroProfessorConvertido = Integer.parseInt(numeroProfessor);
+
+                Professor professor1 = UsuarioController.pesquisarProfessorByNameAndId(textoProfessor, numeroProfessorConvertido);
+                Disciplina disciplina1 = DisciplinaController.pesquisarDisciplinaByNameAndId(textoDisciplina, numeroDisciplinaConvertido);
+                System.out.println("Professor nome " + textoProfessor);
+                if (professor1 == null) {
+                    throw new IllegalArgumentException("Professor  Desconhecida.");
+                } else if (disciplina1 == null) {
+                    throw new IllegalArgumentException(" Disciplina Desconhecida.");
+                }
+
+                turmaById.setCapacidade(capacidade);
+                turmaById.setProfessor(professor1);
+                turmaById.setDisciplina(disciplina1);
+                //jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
+                jtbTurma.setValueAt(disciplina1.getId() + "-" + disciplina1.getNome(), jtbTurma.getSelectedRow(), 1);
+                jtbTurma.setValueAt(professor1.getId() + "-" + professor1.getNome(), jtbTurma.getSelectedRow(), 2);
+                jtbTurma.setValueAt(capacidade, jtbTurma.getSelectedRow(), 3);
+
+                JOptionPane.showMessageDialog(null, "Atualizado Com Sucesso");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleciona um Produto para Atualizar");
@@ -541,6 +587,50 @@ public class MenuTurma extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void jtbTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbTurmaMouseClicked
+        if (jtbTurma.getSelectedRow() != -1) {
+
+            //Settar capacidade
+            int capacidade = (int) jtbTurma.getValueAt(jtbTurma.getSelectedRow(), 3);
+            jspCapacidade.setValue(capacidade);
+            //Pegar o valor
+            String selectedDisciplinaValue = jtbTurma.getValueAt(jtbTurma.getSelectedRow(), 1).toString();
+
+            //Verificar se temos essa Disciplina
+            boolean foundDisci = false;
+            for (int i = 0; i < cbxDisciplina.getItemCount(); i++) {
+                if (cbxDisciplina.getItemAt(i).equals(selectedDisciplinaValue)) {
+                    cbxDisciplina.setSelectedItem(selectedDisciplinaValue);
+                    foundDisci = true;
+                    break;
+                }
+
+            }
+
+            String selectedProfessorValue = jtbTurma.getValueAt(jtbTurma.getSelectedRow(), 2).toString();
+            //Verificar se temos essa Disciplina
+            boolean foundProf = false;
+            for (int i = 0; i < cbxProfessor.getItemCount(); i++) {
+                if (cbxProfessor.getItemAt(i).equals(selectedProfessorValue)) {
+                    cbxProfessor.setSelectedItem(selectedProfessorValue);
+                    foundProf = true;
+                    break;
+                }
+
+            }
+
+            if (!foundProf && !foundDisci) {
+                JOptionPane.showMessageDialog(null, "Disciplina e Professor não encotradas na combobox" + selectedProfessorValue);
+            } else if (!foundDisci) {
+                JOptionPane.showMessageDialog(null, "Disciplina  não encotrada na combobox" + selectedProfessorValue);
+
+            }
+            //lbNome.setText(jtbDisciplina.getValueAt(jtbDisciplina.getSelectedRow(), 1).toString());
+            //lbEmenta.setText(jtbDisciplina.getValueAt(jtbDisciplina.getSelectedRow(), 2).toString());
+            //cbxDisciplina.sele
+            //DefaultTableModel tbDisciplina = (DefaultTableModel) jtbDisciplina.getModel();
+            //tbDisciplina.removeRow((jtbDisciplina.getSelectedRow()));
+        }
+
 
     }//GEN-LAST:event_jtbTurmaMouseClicked
 

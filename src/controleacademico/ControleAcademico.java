@@ -43,7 +43,7 @@ public class ControleAcademico {
         DisciplinaController.saveDisciplina(cienciaComputao);
 
         Professor professor1 = new Professor(1, "Carlo Silva", "Coordebado", new Date(), "professor", "professor123", "professor");
-        Professor professor2 = new Professor(2, "Carlo Silva", "Coordebado", new Date(), "professor", "professor123", "professor");
+        Professor professor2 = new Professor(2, "Manuel Bernado", "Coordebado", new Date(), "professor", "professor123", "professor");
 
         Administrador adm = new Administrador(0, "Administrador", "admin", "admin1234", "admin");
         Aluno aluno = new Aluno(3, "jacinto", "jacinto.aluno", "aluno123", "Aluno");
@@ -51,11 +51,11 @@ public class ControleAcademico {
         UsuarioController.adicionarUsuario(professor1);
         UsuarioController.adicionarUsuario(professor2);
         UsuarioController.adicionarUsuario(aluno);
-
+        /*
         TurmaModel turma1 = new TurmaModel(1, matematica, professor2, 20);
         TurmaModel turma2 = new TurmaModel(2, cienciaComputao, professor1, 20);
         TurmaController.adicionarTurma(turma1);
-        TurmaController.adicionarTurma(turma2);
+        TurmaController.adicionarTurma(turma2); */
 
     }
 
