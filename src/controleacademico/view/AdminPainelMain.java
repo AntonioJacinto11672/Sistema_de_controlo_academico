@@ -4,9 +4,16 @@
  */
 package controleacademico.view;
 
+import controleacademico.controller.UsuarioController;
+import controleacademico.controller.TurmaController;
+import controleacademico.controller.DisciplinaController;
+import controleacademico.controller.UsuarioLogadoController;
+import controleacademico.model.User;
 import controleacademico.view.pagesAdmin.MenuDisciplina;
 import controleacademico.view.pagesAdmin.MenuTurma;
+import controleacademico.view.pagesAdmin.MenuHome;
 import controleacademico.view.pagesAdmin.MenuProfessor;
+
 import java.awt.Color;
 
 /**
@@ -29,6 +36,22 @@ public class AdminPainelMain extends javax.swing.JFrame {
         menuDisciplina.setBackground(DefaultColor);
         menuTurma.setBackground(DefaultColor);
         menuProfessor.setBackground(DefaultColor);
+
+        lbTotalProfessores.setText("" + UsuarioController.TotalProfessor());
+        lbTotalDisciplina.setText("" + DisciplinaController.TotalDisciplina());
+        lbTotalTurmas.setText("" + TurmaController.TotalTurma());
+        
+        
+        User usuarioLogado = UsuarioLogadoController.getUsuarioLogado();
+        System.out.println("User" + usuarioLogado.getNome());
+        if (UsuarioLogadoController.isUsuarioLogado()) {
+            lbUserLogged.setText("Hello, "+usuarioLogado.getNome());
+            System.out.println("Usuario Logado");
+        } else {
+            System.out.println("Usuario Erro de novo" + UsuarioLogadoController.isUsuarioLogado());
+
+        }
+        //UsuarioLogadoController.getUsuarioLogado();
     }
 
     /**
@@ -55,7 +78,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbUserLogged = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -64,17 +87,17 @@ public class AdminPainelMain extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lbTotalDisciplina = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        lbTotalTurmas = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        lbTotalProfessores = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -229,11 +252,11 @@ public class AdminPainelMain extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-cardápio-30.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 37, 50));
 
-        jLabel2.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-usuário-homem-com-círculo-30.png"))); // NOI18N
-        jLabel2.setText("Hello, Admin");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, 30));
+        lbUserLogged.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        lbUserLogged.setForeground(new java.awt.Color(255, 255, 255));
+        lbUserLogged.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-usuário-homem-com-círculo-30.png"))); // NOI18N
+        lbUserLogged.setText("Hello, Admin");
+        jPanel2.add(lbUserLogged, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Bookman Old Style", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(40, 40, 40));
@@ -297,9 +320,9 @@ public class AdminPainelMain extends javax.swing.JFrame {
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        jLabel5.setFont(new java.awt.Font("Bookman Old Style", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("0");
+        lbTotalDisciplina.setFont(new java.awt.Font("Bookman Old Style", 1, 24)); // NOI18N
+        lbTotalDisciplina.setForeground(new java.awt.Color(255, 255, 255));
+        lbTotalDisciplina.setText("0");
 
         jLabel10.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -313,7 +336,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                    .addComponent(lbTotalDisciplina)
                     .addComponent(jLabel10))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -321,7 +344,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(10, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addComponent(lbTotalDisciplina)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -353,9 +376,9 @@ public class AdminPainelMain extends javax.swing.JFrame {
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        jLabel13.setFont(new java.awt.Font("Bookman Old Style", 1, 24)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("0");
+        lbTotalTurmas.setFont(new java.awt.Font("Bookman Old Style", 1, 24)); // NOI18N
+        lbTotalTurmas.setForeground(new java.awt.Color(255, 255, 255));
+        lbTotalTurmas.setText("0");
 
         jLabel14.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -369,7 +392,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
+                    .addComponent(lbTotalTurmas)
                     .addComponent(jLabel14))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -377,7 +400,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(10, Short.MAX_VALUE)
-                .addComponent(jLabel13)
+                .addComponent(lbTotalTurmas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -409,9 +432,9 @@ public class AdminPainelMain extends javax.swing.JFrame {
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        jLabel16.setFont(new java.awt.Font("Bookman Old Style", 1, 24)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("0");
+        lbTotalProfessores.setFont(new java.awt.Font("Bookman Old Style", 1, 24)); // NOI18N
+        lbTotalProfessores.setForeground(new java.awt.Color(255, 255, 255));
+        lbTotalProfessores.setText("0");
 
         jLabel17.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -425,7 +448,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
+                    .addComponent(lbTotalProfessores)
                     .addComponent(jLabel17))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -433,7 +456,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap(10, Short.MAX_VALUE)
-                .addComponent(jLabel16)
+                .addComponent(lbTotalProfessores)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -472,11 +495,9 @@ public class AdminPainelMain extends javax.swing.JFrame {
 
     private void menuHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHomeMouseClicked
         // TODO add your handling code here:
-        //Menu1 menu1 = new Menu1();
-        //jDesktopPane.removeAll();
-        //jDesktopPane.add(menu1).setVisible(true);
-        painelMain.revalidate();
-        painelMain.repaint();
+        MenuHome menuHome1 = new MenuHome();
+        painelMain.removeAll();
+        painelMain.add(menuHome1).setVisible(true);
 
 
     }//GEN-LAST:event_menuHomeMouseClicked
@@ -592,16 +613,12 @@ public class AdminPainelMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -618,6 +635,10 @@ public class AdminPainelMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel lbTitleMain;
+    private javax.swing.JLabel lbTotalDisciplina;
+    private javax.swing.JLabel lbTotalProfessores;
+    private javax.swing.JLabel lbTotalTurmas;
+    private javax.swing.JLabel lbUserLogged;
     private javax.swing.JPanel menuDisciplina;
     private javax.swing.JPanel menuHome;
     private javax.swing.JPanel menuProfessor;

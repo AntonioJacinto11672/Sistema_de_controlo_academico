@@ -19,8 +19,8 @@ public class TurmaModel {
     private int id;
     private Disciplina disciplina;
     private Professor professor;
-    private int capacidade;
-    private ArrayList<Aluno> alunos;
+    private static int capacidade;
+    private static ArrayList<Aluno> alunos;
 
     public TurmaModel(int id, Disciplina disciplina, Professor professor, int capacidade) {
         this.id = id;
@@ -73,11 +73,35 @@ public class TurmaModel {
         this.alunos = alunos;
     }
 
-    public void adicionarAluno(Aluno aluno) throws TurmaLotadaException {
+    public static  boolean adicionarAluno(Aluno aluno) throws TurmaLotadaException {
         if (alunos.size() >= capacidade) {
             throw new TurmaLotadaException("A turma está cheia.");
         }
-        alunos.add(aluno);
+        if (aluno != null) {
+
+            alunos.add(aluno);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static  boolean alunoMatriculado(Aluno alunoM, int idTurma) throws TurmaLotadaException {
+        if(alunoM == null ) {
+            throw new TurmaLotadaException("Aluno Desconhecido");
+        }
+       
+        Aluno alunoF = alunos.stream().filter(a -> a.getId() == alunoM.getId())
+                .findFirst()
+                .orElse(null);
+
+        if (alunoF == null) {
+            return true;
+        } else {
+            System.out.println("");
+            throw new TurmaLotadaException("Usuario já está nessa Turma: " + alunoF.getUserName());
+        }
+
     }
 
 }

@@ -15,6 +15,10 @@ import controleacademico.model.Disciplina;
 public class DisciplinaController {
 
     private static ArrayList<Disciplina> disciplina = new ArrayList<>();
+    
+    public  static  int TotalDisciplina() {
+        return disciplina.size();
+    }
 
     public static boolean saveDisciplina(Disciplina disc) {
         if (disc != null) {

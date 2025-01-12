@@ -45,17 +45,17 @@ public class ControleAcademico {
         Professor professor1 = new Professor(1, "Carlo Silva", "Coordebado", new Date(), "professor", "professor123", "professor");
         Professor professor2 = new Professor(2, "Manuel Bernado", "Coordebado", new Date(), "professor", "professor123", "professor");
 
-        Administrador adm = new Administrador(0, "Administrador", "admin", "admin1234", "admin");
-        Aluno aluno = new Aluno(3, "jacinto", "jacinto.aluno", "aluno123", "Aluno");
+        Administrador adm = new Administrador(0, "Administrador", "admin", "admin", "admin");
+        Aluno aluno = new Aluno(3, "jacinto", "aluno", "aluno", "Aluno");
         UsuarioController.adicionarUsuario(adm);
         UsuarioController.adicionarUsuario(professor1);
         UsuarioController.adicionarUsuario(professor2);
         UsuarioController.adicionarUsuario(aluno);
-        /*
-        TurmaModel turma1 = new TurmaModel(1, matematica, professor2, 20);
-        TurmaModel turma2 = new TurmaModel(2, cienciaComputao, professor1, 20);
+        
+        TurmaModel turma1 = new TurmaModel(1, matematica, professor2, 5);
+        TurmaModel turma2 = new TurmaModel(2, cienciaComputao, professor1, 5);
         TurmaController.adicionarTurma(turma1);
-        TurmaController.adicionarTurma(turma2); */
+        TurmaController.adicionarTurma(turma2); 
 
     }
 

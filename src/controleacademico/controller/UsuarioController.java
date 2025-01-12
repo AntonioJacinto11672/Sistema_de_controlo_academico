@@ -20,13 +20,7 @@ public class UsuarioController {
 
     private static ArrayList<User> users = new ArrayList<>();
 
-    public static void carregarUsers() {
-        users.add(new Administrador(0, "Administrador", "admin", "admin1234", "admin"));
-        users.add(new Professor(2, "Carlo Silva", "Coordebado", new Date(), "professor", "professor123", "professor"));
-        users.add(new Professor(4, "António Jacinto", "professor", new Date(), "professor", "professor", "professor"));
-        users.add(new Aluno(3, "jacinto", "jacinto.aluno", "aluno123", "Aluno"));
-    }
-
+    
     public static User searchUser(String nomeUsuario, String senha) {
         return users.stream()
                 .filter(p -> p.getUserName().equals(nomeUsuario) && p.getPassword().equals(senha))
@@ -72,6 +66,16 @@ public class UsuarioController {
         return users.size() + 1;
     }
 
+    public static int TotalProfessor() {
+        ArrayList<Professor> professores = new ArrayList<>();
+        for (User usuario : users) {
+            if (usuario instanceof Professor) {
+                professores.add((Professor) usuario);
+            }
+        }
+        return professores.size();
+    }
+
     public static ArrayList<Professor> listarProfessores() {
         ArrayList<Professor> professores = new ArrayList<>();
         for (User usuario : users) {
@@ -110,7 +114,7 @@ public class UsuarioController {
     public static Professor pesquisarProfessorByNameAndId(String nome, int id) {
         //System.out.println("Professor nome no backend: " + nome);
         User userP = users.stream()
-                .filter(p -> (p.getId() == id ) && (p.getNome().toLowerCase().contains(nome.toLowerCase())))
+                .filter(p -> (p.getId() == id) && (p.getNome().toLowerCase().contains(nome.toLowerCase())))
                 .findFirst()
                 .orElse(null);
         if (userP instanceof Professor) {

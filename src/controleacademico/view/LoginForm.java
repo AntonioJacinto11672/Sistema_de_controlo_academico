@@ -6,6 +6,7 @@ package controleacademico.view;
 
 import Exceptions.CredenciaisInvalidasException;
 import controleacademico.controller.UsuarioController;
+import controleacademico.controller.UsuarioLogadoController;
 import controleacademico.model.User;
 import controleacademico.model.Professor;
 import controleacademico.model.Aluno;
@@ -196,7 +197,7 @@ public class LoginForm extends javax.swing.JFrame {
             String nomeUsusario = tfdUsername.getText();
             String senha = new String(tfdPassword.getPassword());
             User users = UsuarioController.autenticar(nomeUsusario, senha);
-
+            UsuarioLogadoController.login(users);
             if (users instanceof Administrador) {
                 //new AdminForm((Administrador) users).setVisible(true);
                 new AdminPainelMain().setVisible(true);
@@ -207,6 +208,7 @@ public class LoginForm extends javax.swing.JFrame {
                 //new AlunoForm((Aluno) users).setVisible(true);
                 new AlunoPainel().setVisible(true);
             }
+
             this.dispose();
 
         } catch (CredenciaisInvalidasException ex) {
