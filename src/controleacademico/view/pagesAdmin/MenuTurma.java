@@ -490,7 +490,7 @@ public class MenuTurma extends javax.swing.JInternalFrame {
                 throw new IllegalArgumentException(" Disciplina Desconhecida.");
             }
 
-            TurmaController.autenticar(disciplina1);
+            //TurmaController.autenticar(disciplina1);
             //System.out.println(" Professor: " + professor1.getNome());
 
             TurmaModel turmaModel = new TurmaModel();
@@ -512,9 +512,9 @@ public class MenuTurma extends javax.swing.JInternalFrame {
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 
-        } catch (CredenciaisInvalidasException ex) {
+        } /*catch (CredenciaisInvalidasException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro na Turma", JOptionPane.ERROR_MESSAGE);
-        }
+        }*/
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
@@ -580,7 +580,7 @@ public class MenuTurma extends javax.swing.JInternalFrame {
                         throw new IllegalArgumentException(" Disciplina Desconhecida.");
                     }
                     //TurmaController.autenticar(disciplina1);
-                    TurmaController.autenticarAtualiação(disciplina1, id);
+                    // TurmaController.autenticarAtualiação(disciplina1, id);
 
                     turmaById.setCapacidade(capacidade);
                     turmaById.setProfessor(professor1);
@@ -598,8 +598,6 @@ public class MenuTurma extends javax.swing.JInternalFrame {
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 
-        } catch (CredenciaisInvalidasException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro na Turma", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnAtualizarActionPerformed

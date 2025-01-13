@@ -40,30 +40,62 @@ public class ControleAcademico {
     }
 
     private static void carregarDadosIniciais() {
+        //Adicionar Disciplinas
         Disciplina matematica = new Disciplina(1, "Matématica", "Algebrá e Logaritmo");
         Disciplina cienciaComputao = new Disciplina(2, "Ciência da Computação", "Programação Java");
+        Disciplina historia = new Disciplina(3, "História", "Sobre a história de Angola");
+
         DisciplinaController.saveDisciplina(matematica);
         DisciplinaController.saveDisciplina(cienciaComputao);
+        DisciplinaController.saveDisciplina(historia);
 
-        Professor professor1 = new Professor(1, "Carlo Silva", "Coordebado", new Date(), "professor", "professor", "professor");
-        Professor professor2 = new Professor(2, "Manuel Bernado", "Coordebado", new Date(), "professor1", "professor123", "professor");
+        //Administrador
+        Administrador adm = new Administrador(1, "Administrador", "admin", "admin", "admin");
 
-        Administrador adm = new Administrador(0, "Administrador", "admin", "admin", "admin");
-        Aluno aluno = new Aluno(3, "jacinto", "aluno", "aluno", "Aluno");
+        //Professor
+        Professor professor1 = new Professor(2, "Carlo Silva", "Estagiário", new Date(), "professor", "professor", "professor");
+        Professor professor2 = new Professor(3, "Manuel Bernado", "Coordebado", new Date(), "professor1", "professor1", "professor");
+
+        //Aluno
+        Aluno aluno = new Aluno(4, "Isidora", "isidora", "isidora", "Aluno");
+        Aluno aluno2 = new Aluno(5, "aluno", "aluno", "aluno", "Aluno");
+
         UsuarioController.adicionarUsuario(adm);
         UsuarioController.adicionarUsuario(professor1);
         UsuarioController.adicionarUsuario(professor2);
         UsuarioController.adicionarUsuario(aluno);
+        UsuarioController.adicionarUsuario(aluno2);
 
-        TurmaModel turma1 = new TurmaModel(1, matematica, professor2, 5);
-        TurmaModel turma2 = new TurmaModel(2, cienciaComputao, professor1, 5);
+        TurmaModel turma1 = new TurmaModel(1, matematica, professor1, 5);
+        TurmaModel turma2 = new TurmaModel(2, cienciaComputao, professor2, 5);
+        TurmaModel turma3 = new TurmaModel(3, historia, professor1, 5);
+        TurmaModel turma4 = new TurmaModel(4, matematica, professor2, 5);
+        TurmaModel turma5 = new TurmaModel(5, cienciaComputao, professor2, 5);
+        TurmaModel turma6 = new TurmaModel(6, historia, professor1, 5);
+        TurmaModel turma7 = new TurmaModel(7, historia, professor2, 5);
+
         TurmaController.adicionarTurma(turma1);
         TurmaController.adicionarTurma(turma2);
-        int[] trabalhos = {1,2,3,4};
-        float[] notasTrabalhos = {10.0f,7.0f, 3.0f, 10f};
-        RendimentoEscolar rendimento = new RendimentoEscolar(turma2, aluno, 10, 5, trabalhos, notasTrabalhos);
+        TurmaController.adicionarTurma(turma3);
+        TurmaController.adicionarTurma(turma4);
+        TurmaController.adicionarTurma(turma5);
+        TurmaController.adicionarTurma(turma6);
+        TurmaController.adicionarTurma(turma7);
+
+        //Os rendimentos estão vinculados ao aluno
+        int[] trabalhos = {1, 2, 3, 4};
+        float[] notasTrabalhos = {10.0f, 7.0f, 3.0f, 10f};
+
+        int[] trabalhos2 = {1, 2, 3, 4};
+        float[] notasTrabalhos2 = {3.0f, 2.0f, 3.0f, 10f};
+
+        RendimentoEscolar rendimento = new RendimentoEscolar(turma1, aluno, 10, 5, trabalhos, notasTrabalhos);
+        RendimentoEscolar rendimento1 = new RendimentoEscolar(turma2, aluno2, 5, 5, trabalhos2, notasTrabalhos2);
+
         try {
-            RendimentoEscolarController.saveRendimentoEscolar(turma2, rendimento);
+            RendimentoEscolarController.saveRendimentoEscolar(turma1, rendimento);
+            RendimentoEscolarController.saveRendimentoEscolar(turma2, rendimento1);
+
         } catch (TurmaLotadaException ex) {
             System.out.println("Aluno não criou rendimento escolar");
         }

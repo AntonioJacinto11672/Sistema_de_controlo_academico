@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package controleacademico.view.pagesAdmin;
+
 import controleacademico.controller.UsuarioController;
 import controleacademico.controller.TurmaController;
 import controleacademico.controller.DisciplinaController;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+
 /**
  *
  * @author Double
@@ -18,14 +20,14 @@ public class MenuHome extends javax.swing.JInternalFrame {
      */
     public MenuHome() {
         initComponents();
-        
+
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
-        
-         lbTotalProfessores.setText("" + UsuarioController.TotalProfessor());
-        lbTotalDisciplina.setText("" + DisciplinaController.TotalDisciplina());
-        lbTotalTurmas.setText("" + TurmaController.TotalTurma());
+
+        lbTotalProfessores.setText("" + UsuarioController.TotalProfessor());
+        lbTotalDisciplina.setText("" + TurmaController.TotalTurma());
+        lbTotalTurmas.setText("" + DisciplinaController.TotalDisciplina());
     }
 
     /**
