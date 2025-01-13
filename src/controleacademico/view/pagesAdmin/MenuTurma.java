@@ -154,6 +154,15 @@ public class MenuTurma extends javax.swing.JInternalFrame {
 
         cbxDisciplina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxDisciplina.setPreferredSize(new java.awt.Dimension(72, 30));
+        cbxDisciplina.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                cbxDisciplinaAncestorMoved(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -642,6 +651,10 @@ public class MenuTurma extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jtbTurmaMouseClicked
+
+    private void cbxDisciplinaAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxDisciplinaAncestorMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxDisciplinaAncestorMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

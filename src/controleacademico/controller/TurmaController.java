@@ -9,6 +9,7 @@ import Exceptions.TurmaLotadaException;
 import controleacademico.model.Disciplina;
 import controleacademico.model.TurmaModel;
 import controleacademico.model.Aluno;
+import controleacademico.model.Professor;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -57,6 +58,22 @@ public class TurmaController {
                 .filter(p -> p.getId() == id)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public static ArrayList<TurmaModel> getTurmaByProfessor(Professor prof) {
+        ArrayList<TurmaModel> novaTurma = new ArrayList<>();
+        if (prof != null) {
+            for (TurmaModel turma : turmas) {
+                if (turma.getProfessor().getId() == prof.getId()) {
+                    novaTurma.add(turma);
+                }
+            }
+            return novaTurma;
+        } else {
+            return null;
+
+        }
+
     }
 
     public static void autenticar(Disciplina disciplina) throws CredenciaisInvalidasException {

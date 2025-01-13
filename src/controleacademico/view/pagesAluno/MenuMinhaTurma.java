@@ -54,18 +54,24 @@ public class MenuMinhaTurma extends javax.swing.JInternalFrame {
 
         // Adiciona os dados filtrados ou todos os dados
         String trabalhoString = "";
+        String notaTrabalhoString = "";
+
         for (RendimentoEscolar rendimento : RendimentoData) {
             if (rendimento.getTrabalhos() != null) {
                 trabalhoString = RendimentoEscolarController.TrabalhoToString(rendimento.getTrabalhos());
             }
 
+            if (rendimento.getNotasTrabalhos() != null) {
+                notaTrabalhoString = RendimentoEscolarController.notaTrabalhoToString(rendimento.getNotasTrabalhos());
+            }
+
             //System.out.println("Tamanho do Array " + rendimento.getTrabalhos() == null);
             tbTurma.addRow(new Object[]{
-                rendimento.getTurma().getId() + "-" + rendimento.getTurma().getDisciplina(),
+                rendimento.getTurma().getId()+"-"+rendimento.getTurma().getDisciplina().getNome(),
                 rendimento.getNotaProva1(),
                 rendimento.getNotaProva2(),
                 trabalhoString,
-                rendimento.getNotasTrabalhos(),});
+                notaTrabalhoString,});
         }
     }
 
@@ -208,11 +214,11 @@ public class MenuMinhaTurma extends javax.swing.JInternalFrame {
             float notap1 = 10;
             rendimentoP.setTrabalhos(valueEntrega);
             rendimentoP.setNotaProva1(10);
-            
+
             System.out.println("Rendimento status:  " + rendimentoP.getAluno().getNome());
             ExibirInformacoes();
         } else {
-            JOptionPane.showMessageDialog(null, "Seleciona um Produto para Atualizar");
+            JOptionPane.showMessageDialog(null, "Seleciona uma Turma");
         }
 
     }//GEN-LAST:event_btnEntregarActionPerformed

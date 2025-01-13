@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import controleacademico.model.RendimentoEscolar;
 import controleacademico.model.TurmaModel;
 import controleacademico.model.Aluno;
+import controleacademico.model.Professor;
+import java.util.List;
+
 
 /**
  *
@@ -28,6 +31,8 @@ public class RendimentoEscolarController {
         }
 
     }
+    
+     
 
     /*public static boolean trabalhoTrabalho(Aluno aluno, int trabalhoIndex, int idTurma) {
         RendimentoEscolar redModel = new RendimentoEscolar();
@@ -45,6 +50,15 @@ public class RendimentoEscolarController {
                 .orElse(null);
         return rendi;
     }
+    
+    public static RendimentoEscolar getRendimentoByIdProfessorIdTurma(int idProfessor, int idTurma) {
+        RendimentoEscolar rendi = rendimentosEscolares.stream()
+                .filter(p -> p.getAluno().getId() == idProfessor && p.getTurma().getId() == idTurma)
+                .findFirst()
+                .orElse(null);
+        return rendi;
+    }
+    
 
     public static ArrayList<RendimentoEscolar> listaTodasRendimentos() {
         return rendimentosEscolares;
@@ -105,6 +119,32 @@ public class RendimentoEscolarController {
 
     }
     
+    public static ArrayList<RendimentoEscolar> getRedimentoByProfessor(Professor prof) {
+        ArrayList<RendimentoEscolar> novoRendimento = new ArrayList<>();
+        if (prof != null) {
+            for (RendimentoEscolar rendimento : rendimentosEscolares) {
+                if (rendimento.getTurma().getProfessor().getId() == prof.getId()) {
+                    novoRendimento.add(rendimento);
+                }
+            }
+            return novoRendimento;
+        } else {
+            return null;
+        }
+    }
+   public static ArrayList<RendimentoEscolar> getAlunosByTurma(int idTurma) {
+        ArrayList<RendimentoEscolar> novoRendimento = new ArrayList<>();
+        {
+            for (RendimentoEscolar rendimento : rendimentosEscolares) {
+                if (rendimento.getTurma().getId() == idTurma) {
+                    novoRendimento.add(rendimento);
+                }
+            }
+            return novoRendimento;
+        }
+    }
+   
+    
     public static String TrabalhoToString(int[] trabalhos) {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -118,4 +158,19 @@ public class RendimentoEscolarController {
         sb.append("]");
         return sb.toString();
     }
+    
+     public static String notaTrabalhoToString(float[] trabalhos) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for(int i = 0; i< trabalhos.length; i++){
+            sb.append(trabalhos[i]);
+            if(i < trabalhos.length - 1) {
+                sb.append(",");
+            }
+        }
+        
+        sb.append("]");
+        return sb.toString();
+    }
+     
 }

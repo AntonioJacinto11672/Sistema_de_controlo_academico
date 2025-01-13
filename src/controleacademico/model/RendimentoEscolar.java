@@ -27,7 +27,8 @@ public class RendimentoEscolar {
     }
 
     public RendimentoEscolar() {
-        this.trabalhos = new int[4];
+        this.trabalhos = new int[0];
+        this.notasTrabalhos = new float[0];
     }
 
     public TurmaModel getTurma() {
@@ -67,9 +68,12 @@ public class RendimentoEscolar {
     }
 
     public void setTrabalhos(int trabalhos) {
+        if (this.trabalhos.length == 0) {
+            this.trabalhos = new int[4];
+        }
         if (trabalhos >= 0 && trabalhos <= this.trabalhos.length) {
-            System.out.println("Index no model: " + (trabalhos-1));
-            this.trabalhos[trabalhos-1] = trabalhos;
+            System.out.println("Index no model: " + (trabalhos - 1));
+            this.trabalhos[trabalhos - 1] = trabalhos;
         } else {
             System.out.println("Osição invalida");
         }
@@ -79,8 +83,18 @@ public class RendimentoEscolar {
         return notasTrabalhos;
     }
 
-    public void setNotasTrabalhos(float[] notasTrabalhos) {
-        this.notasTrabalhos = notasTrabalhos;
+    public void setNotasTrabalhos(int index, float notasTrabalhos) {
+        System.out.println("Ínicio " + (index - 1) + " tamanho " + this.notasTrabalhos.length);
+        if (this.notasTrabalhos.length == 0) {
+            this.notasTrabalhos = new float[4];
+        }
+
+        if (index >= 0 && index <= 4) {
+            System.out.println("Entrou " + (index - 1));
+            this.notasTrabalhos[index - 1] = notasTrabalhos;
+        }
+
     }
 
+   
 }
