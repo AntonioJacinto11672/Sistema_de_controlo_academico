@@ -27,6 +27,7 @@ public class RendimentoEscolar {
     }
 
     public RendimentoEscolar() {
+        this.trabalhos = new int[4];
     }
 
     public TurmaModel getTurma() {
@@ -65,8 +66,13 @@ public class RendimentoEscolar {
         return trabalhos;
     }
 
-    public void setTrabalhos(int[] trabalhos) {
-        this.trabalhos = trabalhos;
+    public void setTrabalhos(int trabalhos) {
+        if (trabalhos >= 0 && trabalhos <= this.trabalhos.length) {
+            System.out.println("Index no model: " + (trabalhos-1));
+            this.trabalhos[trabalhos-1] = trabalhos;
+        } else {
+            System.out.println("Osição invalida");
+        }
     }
 
     public float[] getNotasTrabalhos() {

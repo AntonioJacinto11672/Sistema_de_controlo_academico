@@ -29,6 +29,23 @@ public class RendimentoEscolarController {
 
     }
 
+    /*public static boolean trabalhoTrabalho(Aluno aluno, int trabalhoIndex, int idTurma) {
+        RendimentoEscolar redModel = new RendimentoEscolar();
+        int[] arr = {trabalhoIndex};
+        for (RendimentoEscolar rendimento : rendimentosEscolares) {
+            if (rendimento.getAluno().getId() == aluno.getId() && rendimento.getTurma().getId() == idTurma) {
+                redModel.setTrabalhos(arr);
+            }
+        }
+    }*/
+    public static RendimentoEscolar getRendimentoByIdAlunoIdTurma(int idAluno, int idTurma) {
+        RendimentoEscolar rendi = rendimentosEscolares.stream()
+                .filter(p -> p.getAluno().getId() == idAluno && p.getTurma().getId() == idTurma)
+                .findFirst()
+                .orElse(null);
+        return rendi;
+    }
+
     public static ArrayList<RendimentoEscolar> listaTodasRendimentos() {
         return rendimentosEscolares;
     }
@@ -52,7 +69,7 @@ public class RendimentoEscolarController {
     public static ArrayList<TurmaModel> obterTurmasNaoMatriculadas(Aluno aluno) {
         ArrayList<TurmaModel> turmasNaoMatriculadas = new ArrayList<>();
         ArrayList<TurmaModel> turmas = TurmaController.listaTodasTurma();
-        
+
         for (TurmaModel turma : turmas) {
             boolean estaMatriculado = false;
 
@@ -71,5 +88,34 @@ public class RendimentoEscolarController {
         }
 
         return turmasNaoMatriculadas;
+    }
+
+    public static ArrayList<RendimentoEscolar> getRedimentoBYAluno(Aluno aluno) {
+        ArrayList<RendimentoEscolar> novoRendimento = new ArrayList<RendimentoEscolar>();
+        if (aluno != null) {
+            for (RendimentoEscolar rendimento : rendimentosEscolares) {
+                if (rendimento.getAluno().getId() == aluno.getId()) {
+                    novoRendimento.add(rendimento);
+                }
+            }
+            return novoRendimento;
+        } else {
+            return null;
+        }
+
+    }
+    
+    public static String TrabalhoToString(int[] trabalhos) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for(int i = 0; i< trabalhos.length; i++){
+            sb.append(trabalhos[i]);
+            if(i < trabalhos.length - 1) {
+                sb.append(",");
+            }
+        }
+        
+        sb.append("]");
+        return sb.toString();
     }
 }

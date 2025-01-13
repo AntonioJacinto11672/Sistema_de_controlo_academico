@@ -402,7 +402,7 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
                         System.out.println("id TUrma fora " + turmaById.getId());
                         if (res) {
                             ExibirInformacoes();
-                            JOptionPane.showMessageDialog(null, "Foste Matriculado a  turma: " + turmaById.getDisciplina().getNome());
+                            JOptionPane.showMessageDialog(null, "Matriculado com Sucesso!: " + turmaById.getDisciplina().getNome());
                         } else {
                             JOptionPane.showMessageDialog(null, "Matricula Sem Sucesso");
 
