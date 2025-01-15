@@ -13,6 +13,8 @@ import controleacademico.view.pagesAdmin.MenuDisciplina;
 import controleacademico.view.pagesAdmin.MenuTurma;
 import controleacademico.view.pagesAdmin.MenuHome;
 import controleacademico.view.pagesAdmin.MenuProfessor;
+import controleacademico.view.pagesAdmin.MenuTurmaAlernativa;
+import controleacademico.view.pagesAdmin.MenuTurmaDisciplina;
 
 import java.awt.Color;
 
@@ -40,12 +42,11 @@ public class AdminPainelMain extends javax.swing.JFrame {
         lbTotalProfessores.setText("" + UsuarioController.TotalProfessor());
         lbTotalDisciplina.setText("" + DisciplinaController.TotalDisciplina());
         lbTotalTurmas.setText("" + TurmaController.TotalTurma());
-        
-        
+
         User usuarioLogado = UsuarioLogadoController.getUsuarioLogado();
         //System.out.println("User" + usuarioLogado.getNome());
         if (UsuarioLogadoController.isUsuarioLogado()) {
-            lbUserLogged.setText("Hello, "+usuarioLogado.getNome());
+            lbUserLogged.setText("Hello, " + usuarioLogado.getNome());
             //System.out.println("Usuario Logado");
         } else {
             //System.out.println("Usuario Erro de novo" + UsuarioLogadoController.isUsuarioLogado());
@@ -76,6 +77,8 @@ public class AdminPainelMain extends javax.swing.JFrame {
         pnTerminarSessão = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
+        menuTurmaDisciplina = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbUserLogged = new javax.swing.JLabel();
@@ -209,6 +212,23 @@ public class AdminPainelMain extends javax.swing.JFrame {
             .addGap(0, 8, Short.MAX_VALUE)
         );
 
+        menuTurmaDisciplina.setBackground(new java.awt.Color(40, 40, 40));
+        menuTurmaDisciplina.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuTurmaDisciplinaMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuTurmaDisciplinaMousePressed(evt);
+            }
+        });
+        menuTurmaDisciplina.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-treinamento-15.png"))); // NOI18N
+        jLabel13.setText("Turma & Disciplina");
+        menuTurmaDisciplina.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -223,6 +243,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
                     .addComponent(pnTerminarSessão, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(menuTurmaDisciplina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,7 +256,9 @@ public class AdminPainelMain extends javax.swing.JFrame {
                 .addComponent(menuTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menuProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(menuTurmaDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,6 +596,23 @@ public class AdminPainelMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pnTerminarSessãoMousePressed
 
+    private void menuTurmaDisciplinaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTurmaDisciplinaMouseClicked
+        // TODO add your handling code here:
+        MenuTurmaDisciplina menuTurmaDisciplina = new MenuTurmaDisciplina();
+        painelMain.removeAll();
+        painelMain.add(menuTurmaDisciplina).setVisible(true);
+    }//GEN-LAST:event_menuTurmaDisciplinaMouseClicked
+
+    private void menuTurmaDisciplinaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTurmaDisciplinaMousePressed
+        // TODO add your handling code here:
+        menuHome.setBackground(DefaultColor);
+        menuDisciplina.setBackground(DefaultColor);
+        menuTurma.setBackground(DefaultColor);
+        menuProfessor.setBackground(DefaultColor);
+        menuDisciplina.setBackground(ClickedColor);
+
+    }//GEN-LAST:event_menuTurmaDisciplinaMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -613,6 +653,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
@@ -643,6 +684,7 @@ public class AdminPainelMain extends javax.swing.JFrame {
     private javax.swing.JPanel menuHome;
     private javax.swing.JPanel menuProfessor;
     private javax.swing.JPanel menuTurma;
+    private javax.swing.JPanel menuTurmaDisciplina;
     private javax.swing.JPanel painelMain;
     private javax.swing.JPanel pnTerminarSessão;
     // End of variables declaration//GEN-END:variables

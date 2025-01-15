@@ -9,20 +9,26 @@ package controleacademico.model;
  * @author Double
  */
 public class Disciplina {
+
+    
     private int id;
     private String nome;
     private String ementa;
+    private Professor professor;
 
-    public Disciplina(int id, String nome, String ementa) {
+    public Disciplina(int id, String nome, String ementa, Professor professor) {
         this.id = id;
         this.nome = nome;
         this.ementa = ementa;
+        this.professor = professor;
     }
 
     public Disciplina() {
     }
     
+    
 
+    
     public int getId() {
         return id;
     }
@@ -46,9 +52,14 @@ public class Disciplina {
     public void setEmenta(String ementa) {
         this.ementa = ementa;
     }
-    
-    @Override
-    public String toString() {
-        return this.getNome();
+
+    public Professor getProfessor() {
+        return professor;
     }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+    
+    
 }

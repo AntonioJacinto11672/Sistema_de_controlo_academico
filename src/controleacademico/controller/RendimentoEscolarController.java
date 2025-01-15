@@ -10,8 +10,9 @@ import controleacademico.model.RendimentoEscolar;
 import controleacademico.model.TurmaModel;
 import controleacademico.model.Aluno;
 import controleacademico.model.Professor;
-import java.util.List;
+import controleacademico.model.Disciplina;
 
+import java.util.List;
 
 /**
  *
@@ -31,18 +32,7 @@ public class RendimentoEscolarController {
         }
 
     }
-    
-     
 
-    /*public static boolean trabalhoTrabalho(Aluno aluno, int trabalhoIndex, int idTurma) {
-        RendimentoEscolar redModel = new RendimentoEscolar();
-        int[] arr = {trabalhoIndex};
-        for (RendimentoEscolar rendimento : rendimentosEscolares) {
-            if (rendimento.getAluno().getId() == aluno.getId() && rendimento.getTurma().getId() == idTurma) {
-                redModel.setTrabalhos(arr);
-            }
-        }
-    }*/
     public static RendimentoEscolar getRendimentoByIdAlunoIdTurma(int idAluno, int idTurma) {
         RendimentoEscolar rendi = rendimentosEscolares.stream()
                 .filter(p -> p.getAluno().getId() == idAluno && p.getTurma().getId() == idTurma)
@@ -50,7 +40,7 @@ public class RendimentoEscolarController {
                 .orElse(null);
         return rendi;
     }
-    
+
     public static RendimentoEscolar getRendimentoByIdProfessorIdTurma(int idProfessor, int idTurma) {
         RendimentoEscolar rendi = rendimentosEscolares.stream()
                 .filter(p -> p.getAluno().getId() == idProfessor && p.getTurma().getId() == idTurma)
@@ -58,7 +48,6 @@ public class RendimentoEscolarController {
                 .orElse(null);
         return rendi;
     }
-    
 
     public static ArrayList<RendimentoEscolar> listaTodasRendimentos() {
         return rendimentosEscolares;
@@ -118,21 +107,27 @@ public class RendimentoEscolarController {
         }
 
     }
-    
+
     public static ArrayList<RendimentoEscolar> getRedimentoByProfessor(Professor prof) {
         ArrayList<RendimentoEscolar> novoRendimento = new ArrayList<>();
         if (prof != null) {
             for (RendimentoEscolar rendimento : rendimentosEscolares) {
-                if (rendimento.getTurma().getProfessor().getId() == prof.getId()) {
-                    novoRendimento.add(rendimento);
+                if (rendimento.getTurma().getDisciplina() != null) {
+                    for (Disciplina disc : rendimento.getTurma().getDisciplina()) {
+                        if (disc.getProfessor().getId() == prof.getId()) {
+                            novoRendimento.add(rendimento);
+                        }
+                    }
                 }
+
             }
             return novoRendimento;
         } else {
             return null;
         }
     }
-   public static ArrayList<RendimentoEscolar> getAlunosByTurma(int idTurma) {
+
+    public static ArrayList<RendimentoEscolar> getAlunosByTurma(int idTurma) {
         ArrayList<RendimentoEscolar> novoRendimento = new ArrayList<>();
         {
             for (RendimentoEscolar rendimento : rendimentosEscolares) {
@@ -143,34 +138,33 @@ public class RendimentoEscolarController {
             return novoRendimento;
         }
     }
-   
-    
+
     public static String TrabalhoToString(int[] trabalhos) {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for(int i = 0; i< trabalhos.length; i++){
+        for (int i = 0; i < trabalhos.length; i++) {
             sb.append(trabalhos[i]);
-            if(i < trabalhos.length - 1) {
+            if (i < trabalhos.length - 1) {
                 sb.append(",");
             }
         }
-        
+
         sb.append("]");
         return sb.toString();
     }
-    
-     public static String notaTrabalhoToString(float[] trabalhos) {
+
+    public static String notaTrabalhoToString(float[] trabalhos) {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for(int i = 0; i< trabalhos.length; i++){
+        for (int i = 0; i < trabalhos.length; i++) {
             sb.append(trabalhos[i]);
-            if(i < trabalhos.length - 1) {
+            if (i < trabalhos.length - 1) {
                 sb.append(",");
             }
         }
-        
+
         sb.append("]");
         return sb.toString();
     }
-     
+
 }

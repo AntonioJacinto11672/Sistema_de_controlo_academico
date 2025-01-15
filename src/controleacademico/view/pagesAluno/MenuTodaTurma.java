@@ -52,13 +52,20 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
 
         System.out.print("Inicializou o Metodo");
         tbTurma.setRowCount(0);
+        Disciplina disciplina = null;
 
         // Adiciona os dados filtrados ou todos os dados
         for (TurmaModel turma : TurmaData) {
+             
+            for (Disciplina disc : turma.getDisciplina()) {
+                disciplina = disc;
+                System.err.println("Disciplinas do mesmo" + disc.getNome());
+            }
+             
             tbTurma.addRow(new Object[]{
                 turma.getId(),
-                turma.getDisciplina().getId() + "-" + turma.getDisciplina().getNome(),
-                turma.getProfessor().getId() + "-" + turma.getProfessor().getNome(),
+                disciplina.getNome(),
+                disciplina.getProfessor().getNome(),
                 turma.getCapacidade()
             });
         }
@@ -400,12 +407,12 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
                         RendimentoModal.setTurma(turmaById);
                         boolean res = RendimentoEscolarController.saveRendimentoEscolar(turmaById, RendimentoModal);
                         System.out.println("id TUrma fora " + turmaById.getId());
+                        
                         if (res) {
                             ExibirInformacoes();
-                            JOptionPane.showMessageDialog(null, "Matriculado com Sucesso!: " + turmaById.getDisciplina().getNome());
+                            JOptionPane.showMessageDialog(null, "Matriculado com Sucesso!: ");
                         } else {
                             JOptionPane.showMessageDialog(null, "Matricula Sem Sucesso");
-
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario Desconhecido irá sair do Sistema");

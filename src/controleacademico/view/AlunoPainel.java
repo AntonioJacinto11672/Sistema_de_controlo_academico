@@ -10,6 +10,8 @@ import controleacademico.controller.DisciplinaController;
 import controleacademico.controller.RendimentoEscolarController;
 import controleacademico.controller.UsuarioLogadoController;
 import controleacademico.model.Aluno;
+import controleacademico.model.Disciplina;
+import controleacademico.model.Professor;
 import controleacademico.model.TurmaModel;
 import controleacademico.model.User;
 import controleacademico.model.RendimentoEscolar;
@@ -64,14 +66,19 @@ public class AlunoPainel extends javax.swing.JFrame {
         DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
 
         tbTurma.setRowCount(0);
+        Disciplina disciplina = null;
 
         for (RendimentoEscolar rendimento : RendimentoData) {
             //System.out.println("Tamanho do Array " + rendimento.getTrabalhos() == null);
+            for (Disciplina disc : rendimento.getTurma().getDisciplina()) {
+                disciplina = disc;
+                System.err.println("Disciplinas do mesmo" + disc.getNome());
+            }
             tbTurma.addRow(new Object[]{
                 rendimento.getTurma().getId(),
-                rendimento.getTurma().getDisciplina().getNome(),
-                rendimento.getTurma().getDisciplina().getEmenta(),
-                rendimento.getTurma().getProfessor().getNome(),});
+                disciplina.getNome(),
+                disciplina.getEmenta(),
+                disciplina.getProfessor().getNome(),});
         }
     }
 

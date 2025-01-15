@@ -47,9 +47,14 @@ public class MenuMinhaTurma extends javax.swing.JInternalFrame {
         ArrayList<TurmaModel> turmaData = TurmaController.getTurmaByProfessor(usuarioLogado);
 
         modeloTurma.addElement("Seleciona");
-
+        Disciplina disciplina = null;
         for (TurmaModel turmaM : turmaData) {
-            modeloTurma.addElement(turmaM.getId() + "-" + turmaM.getDisciplina().getNome());
+            for (Disciplina disc : turmaM.getDisciplina()) {
+                disciplina = disc;
+                //System.err.println("Disciplinas do mesmo" + disc.getNome());
+            }
+
+            modeloTurma.addElement(turmaM.getId() + "-" + disciplina.getNome());
             //cbxTurma.addItem(turmaM.getDisciplina().getNome());
         }
         cbxTurma.setModel(modeloTurma);
@@ -364,7 +369,7 @@ public class MenuMinhaTurma extends javax.swing.JInternalFrame {
         if (cbxTurmaValue.equals("Seleciona")) {
             DefaultTableModel tbTurma = (DefaultTableModel) jtbRendimento.getModel();
             tbTurma.setRowCount(0);
-            
+
         } else {
             String[] partes = cbxTurmaValue.split("-");
             int id = Integer.parseInt(partes[0]);

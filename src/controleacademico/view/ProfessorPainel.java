@@ -10,6 +10,7 @@ import controleacademico.controller.DisciplinaController;
 import controleacademico.controller.RendimentoEscolarController;
 import controleacademico.controller.UsuarioLogadoController;
 import controleacademico.model.Aluno;
+import controleacademico.model.Disciplina;
 import controleacademico.model.TurmaModel;
 import controleacademico.model.User;
 import controleacademico.model.Professor;
@@ -62,13 +63,17 @@ public class ProfessorPainel extends javax.swing.JFrame {
         DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
 
         tbTurma.setRowCount(0);
-
+        Disciplina disciplina = null;
         for (TurmaModel turma : turmaData) {
-            //System.out.println("Tamanho do Array " + rendimento.getTrabalhos() == null);
+            for (Disciplina disc : turma.getDisciplina()) {
+                disciplina = disc;
+                //System.err.println("Disciplinas do mesmo" + disc.getNome());
+            }
+            
             tbTurma.addRow(new Object[]{
                 turma.getId(),
-                turma.getDisciplina().getNome(),
-                turma.getDisciplina().getEmenta()});
+                disciplina.getNome(),
+                disciplina.getEmenta()});
         }
     }
 
@@ -92,6 +97,8 @@ public class ProfessorPainel extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         menuMedia = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        menuMinhaTurma1 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbUserLogged = new javax.swing.JLabel();
@@ -196,6 +203,23 @@ public class ProfessorPainel extends javax.swing.JFrame {
         jLabel14.setText("Médias");
         menuMedia.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
+        menuMinhaTurma1.setBackground(new java.awt.Color(40, 40, 40));
+        menuMinhaTurma1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuMinhaTurma1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuMinhaTurma1MousePressed(evt);
+            }
+        });
+        menuMinhaTurma1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-classe-15.png"))); // NOI18N
+        jLabel15.setText("Todas Turmas");
+        menuMinhaTurma1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -209,6 +233,7 @@ public class ProfessorPainel extends javax.swing.JFrame {
                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(menuMinhaTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(menuMedia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menuMinhaTurma1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,8 +243,10 @@ public class ProfessorPainel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menuMinhaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(menuMinhaTurma1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menuMedia, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,6 +427,14 @@ public class ProfessorPainel extends javax.swing.JFrame {
         lbTitleMain.setText("Médias por Turma");
     }//GEN-LAST:event_menuMediaMousePressed
 
+    private void menuMinhaTurma1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMinhaTurma1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuMinhaTurma1MouseClicked
+
+    private void menuMinhaTurma1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMinhaTurma1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuMinhaTurma1MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -442,6 +477,7 @@ public class ProfessorPainel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -459,6 +495,7 @@ public class ProfessorPainel extends javax.swing.JFrame {
     private javax.swing.JPanel menuHome;
     private javax.swing.JPanel menuMedia;
     private javax.swing.JPanel menuMinhaTurma;
+    private javax.swing.JPanel menuMinhaTurma1;
     private javax.swing.JPanel painelMain;
     private javax.swing.JPanel pnTerminarSessão;
     // End of variables declaration//GEN-END:variables

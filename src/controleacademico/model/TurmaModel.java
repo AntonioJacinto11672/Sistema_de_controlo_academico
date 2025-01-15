@@ -17,19 +17,16 @@ import controleacademico.model.Professor;
 public class TurmaModel {
 
     private int id;
-    private Disciplina disciplina;
-    private Professor professor;
+    private ArrayList<Disciplina> disciplinas;
     private int capacidade;
 
-    public TurmaModel(int id, Disciplina disciplina, Professor professor, int capacidade) {
+    public TurmaModel(int id, int capacidade) {
         this.id = id;
-        this.disciplina = disciplina;
-        this.professor = professor;
         this.capacidade = capacidade;
-
     }
 
     public TurmaModel() {
+        this.disciplinas = new ArrayList<>();
     }
 
     public int getId() {
@@ -40,20 +37,16 @@ public class TurmaModel {
         this.id = id;
     }
 
-    public Disciplina getDisciplina() {
-        return disciplina;
+    public ArrayList<Disciplina> getDisciplina() {
+        return disciplinas;
     }
 
     public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
-    }
-
-    public Professor getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+        if (this.disciplinas == null) {
+            this.disciplinas = new ArrayList<>();
+        }
+        
+        this.disciplinas.add(disciplina);
     }
 
     public int getCapacidade() {

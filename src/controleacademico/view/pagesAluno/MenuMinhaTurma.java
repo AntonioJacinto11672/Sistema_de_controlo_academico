@@ -55,6 +55,7 @@ public class MenuMinhaTurma extends javax.swing.JInternalFrame {
         // Adiciona os dados filtrados ou todos os dados
         String trabalhoString = "";
         String notaTrabalhoString = "";
+        Disciplina disciplina = null;
 
         for (RendimentoEscolar rendimento : RendimentoData) {
             if (rendimento.getTrabalhos() != null) {
@@ -65,9 +66,14 @@ public class MenuMinhaTurma extends javax.swing.JInternalFrame {
                 notaTrabalhoString = RendimentoEscolarController.notaTrabalhoToString(rendimento.getNotasTrabalhos());
             }
 
+            for (Disciplina disc : rendimento.getTurma().getDisciplina()) {
+                disciplina = disc;
+                //System.err.println("Disciplinas do mesmo" + disc.getNome());
+            }
+
             //System.out.println("Tamanho do Array " + rendimento.getTrabalhos() == null);
             tbTurma.addRow(new Object[]{
-                rendimento.getTurma().getId()+"-"+rendimento.getTurma().getDisciplina().getNome(),
+                rendimento.getTurma().getId() + "-" + disciplina.getNome(),
                 rendimento.getNotaProva1(),
                 rendimento.getNotaProva2(),
                 trabalhoString,
@@ -203,7 +209,7 @@ public class MenuMinhaTurma extends javax.swing.JInternalFrame {
             //Pegar o rendiment
             if (trabalhos == null) {
 
-                System.out.println("Trabalhos nulll" + valueEntrega + "id Turma " + parteInteiraIdTurma);
+                //System.out.println("Trabalhos nulll" + valueEntrega + "id Turma " + parteInteiraIdTurma);
             }
             //Pegar rendimento com a turma
             RendimentoEscolar rendimentoP = RendimentoEscolarController.getRendimentoByIdAlunoIdTurma(usuarioLogado.getId(), parteInteiraIdTurma);
@@ -215,7 +221,7 @@ public class MenuMinhaTurma extends javax.swing.JInternalFrame {
             rendimentoP.setTrabalhos(valueEntrega);
             rendimentoP.setNotaProva1(10);
 
-            System.out.println("Rendimento status:  " + rendimentoP.getAluno().getNome());
+            //System.out.println("Rendimento status:  " + rendimentoP.getAluno().getNome());
             ExibirInformacoes();
         } else {
             JOptionPane.showMessageDialog(null, "Seleciona uma Turma");

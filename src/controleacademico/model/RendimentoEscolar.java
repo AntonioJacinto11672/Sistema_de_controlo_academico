@@ -75,7 +75,7 @@ public class RendimentoEscolar {
             System.out.println("Index no model: " + (trabalhos - 1));
             this.trabalhos[trabalhos - 1] = trabalhos;
         } else {
-            System.out.println("Osição invalida");
+            System.out.println("Opição invalida");
         }
     }
 

@@ -50,14 +50,19 @@ public class MenuHome extends javax.swing.JInternalFrame {
         DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
 
         tbTurma.setRowCount(0);
+        Disciplina disciplina = null;
 
         for (RendimentoEscolar rendimento : RendimentoData) {
             //System.out.println("Tamanho do Array " + rendimento.getTrabalhos() == null);
+            for (Disciplina disc : rendimento.getTurma().getDisciplina()) {
+                disciplina = disc;
+                //System.err.println("Disciplinas do mesmo" + disc.getNome());
+            }
             tbTurma.addRow(new Object[]{
                 rendimento.getTurma().getId(),
-                rendimento.getTurma().getDisciplina().getNome(),
-                rendimento.getTurma().getDisciplina().getEmenta(),
-                rendimento.getTurma().getProfessor().getNome(),});
+                disciplina.getNome(),
+                disciplina.getEmenta(),
+                disciplina.getProfessor().getNome(),});
         }
     }
 

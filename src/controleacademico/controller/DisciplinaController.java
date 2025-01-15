@@ -43,6 +43,13 @@ public class DisciplinaController {
                 .findFirst()
                 .orElse(null);
     }
+    
+     public static Disciplina getDisciplinaByName(String  nome) {
+        return disciplina.stream()
+                .filter(p -> p.getNome().equals(nome))
+                .findFirst()
+                .orElse(null);
+    }
 
     public static boolean RemoveDisciplina(int id) {
         boolean result = disciplina.removeIf(p -> p.getId() == id);

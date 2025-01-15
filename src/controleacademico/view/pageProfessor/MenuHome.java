@@ -51,13 +51,17 @@ public class MenuHome extends javax.swing.JInternalFrame {
         DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
 
         tbTurma.setRowCount(0);
-
+        Disciplina disciplina = null;
         for (TurmaModel turma : turmaData) {
-            //System.out.println("Tamanho do Array " + rendimento.getTrabalhos() == null);
+            for (Disciplina disc : turma.getDisciplina()) {
+                disciplina = disc;
+                //System.err.println("Disciplinas do mesmo" + disc.getNome());
+            }
+
             tbTurma.addRow(new Object[]{
                 turma.getId(),
-                turma.getDisciplina().getNome(),
-                turma.getDisciplina().getEmenta()});
+                disciplina.getNome(),
+                disciplina.getEmenta()});
         }
     }
 

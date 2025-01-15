@@ -64,7 +64,8 @@ public class TurmaController {
         ArrayList<TurmaModel> novaTurma = new ArrayList<>();
         if (prof != null) {
             for (TurmaModel turma : turmas) {
-                if (turma.getProfessor().getId() == prof.getId()) {
+                for(Disciplina disciplina:turma.getDisciplina())
+                if (disciplina.getProfessor().getId() == prof.getId()) {
                     novaTurma.add(turma);
                 }
             }
@@ -72,26 +73,6 @@ public class TurmaController {
         } else {
             return null;
 
-        }
-
-    }
-
-    public static void autenticar(Disciplina disciplina) throws CredenciaisInvalidasException {
-        boolean result = turmas.stream()
-                .anyMatch(u -> u.getDisciplina().equals(disciplina));
-
-        if (result) {
-            throw new CredenciaisInvalidasException("A Turma Com Disciplina já está cadastrada.");
-        }
-
-    }
-
-    public static void autenticarAtualiação(Disciplina disciplina, int idTurma) throws CredenciaisInvalidasException {
-        boolean result = turmas.stream()
-                .anyMatch(u -> u.getDisciplina().equals(disciplina) && u.getId() != idTurma);
-
-        if (result) {
-            throw new CredenciaisInvalidasException("A Turma Com Disciplina já está cadastrada.");
         }
 
     }

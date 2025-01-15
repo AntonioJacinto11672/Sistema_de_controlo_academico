@@ -48,14 +48,20 @@ public class MenuMedia extends javax.swing.JInternalFrame {
 
         modeloTurma.addElement("Seleciona");
 
+        Disciplina disciplina = null;
+
         for (TurmaModel turmaM : turmaData) {
-            modeloTurma.addElement(turmaM.getId() + "-" + turmaM.getDisciplina().getNome());
+            for(Disciplina disc:turmaM.getDisciplina()) {
+                disciplina = disc;
+            }
+
+            modeloTurma.addElement(turmaM.getId() + "-" + disciplina.getNome());
             //cbxTurma.addItem(turmaM.getDisciplina().getNome());
         }
         cbxTurma.setModel(modeloTurma);
-        
+
         lbAlunoAprovado.setText("");
-        lbAlunoExame.setText("" );
+        lbAlunoExame.setText("");
         lbAlunoReprovados.setText("");
 
     }
@@ -66,7 +72,7 @@ public class MenuMedia extends javax.swing.JInternalFrame {
         ArrayList<RendimentoEscolar> RendimentoData = RendimentoEscolarController.getAlunosByTurma(idTurma);
         DefaultTableModel tbTurma = (DefaultTableModel) jtbRendimento.getModel();
 
-        System.out.print("Inicializou o Metodo");
+        //System.out.print("Inicializou o Metodo");
         tbTurma.setRowCount(0);
 
         // Adiciona os dados filtrados ou todos os dados
@@ -107,8 +113,8 @@ public class MenuMedia extends javax.swing.JInternalFrame {
                         situacao = "Reprovado";
                         reprovados++;
                     }
-                    System.out.println("Trabalho  nota:  média Artimetrica 1" + maP1 + " Media arti 2" + maP2 + "média ponderada 1" + mpP1 + "média ponderada 1" + mpP2);
-                    System.out.println("Média Final" + media);
+                    //System.out.println("Trabalho  nota:  média Artimetrica 1" + maP1 + " Media arti 2" + maP2 + "média ponderada 1" + mpP1 + "média ponderada 1" + mpP2);
+                    //System.out.println("Média Final" + media);
                 }
             }
 

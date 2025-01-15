@@ -35,38 +35,18 @@ public class MenuTurma extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
         ExibirInformacoes();
 
-        //JComboBox<Disciplina> cbDisciplina = new JComboBox<>(DisciplinaController.listaTodasDisciplina().toArray(new Disciplina[0]));
-        // Carregar disciplinas
-        DefaultComboBoxModel<String> modeloDisciplinas = new DefaultComboBoxModel<>();
-        for (Disciplina d : DisciplinaController.listaTodasDisciplina()) {
-            modeloDisciplinas.addElement(d.getId() + "-" + d.getNome());
-            cbxDisciplina.addItem(d.getNome());
-        }
-        cbxDisciplina.setModel(modeloDisciplinas);
-        //cbxDisciplina.setModel(modeloDisciplinas);
-
-        // Carregar professores
-        DefaultComboBoxModel<String> modeloProfessores = new DefaultComboBoxModel<>();
-        for (Professor p : UsuarioController.listarProfessores()) {
-            modeloProfessores.addElement(p.getId() + "-" + p.getNome());
-        }
-        cbxProfessor.setModel(modeloProfessores);
     }
 
     private void ExibirInformacoes() {
 
         ArrayList<TurmaModel> TurmaData = TurmaController.listaTodasTurma();
         DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
-
-        System.out.print("Inicializou o Metodo");
         tbTurma.setRowCount(0);
 
         // Adiciona os dados filtrados ou todos os dados
         for (TurmaModel turma : TurmaData) {
             tbTurma.addRow(new Object[]{
                 turma.getId(),
-                turma.getDisciplina().getId() + "-" + turma.getDisciplina().getNome(),
-                turma.getProfessor().getId() + "-" + turma.getProfessor().getNome(),
                 turma.getCapacidade()
             });
         }
@@ -94,27 +74,17 @@ public class MenuTurma extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
         btnDelete1 = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
-        cbxProfessor = new javax.swing.JComboBox<>();
         jspCapacidade = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
-        cbxDisciplina = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbTurma = new javax.swing.JTable();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel2.setText("Disciplina");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel3.setText("Professor");
 
         btnCadastrar.setBackground(new java.awt.Color(0, 102, 94));
         btnCadastrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -146,289 +116,256 @@ public class MenuTurma extends javax.swing.JInternalFrame {
             }
         });
 
-        cbxProfessor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sem Professor" }));
-
         jspCapacidade.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         jLabel1.setText("Capacidade");
-
-        cbxDisciplina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbxDisciplina.setPreferredSize(new java.awt.Dimension(72, 30));
-        cbxDisciplina.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                cbxDisciplinaAncestorMoved(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(cbxDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jspCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
-                        .addComponent(btnDelete1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(192, 192, 192))
-                            .addComponent(cbxProfessor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel1)
-                                .addGap(58, 58, 58))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jspCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel1)))
+                .addGap(42, 42, 42))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jspCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(94, 94, 94))
+                .addGap(130, 130, 130))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 668, 170));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 668, 130));
 
         jtbTurma.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 94), 1, true));
         jtbTurma.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "id", "Disciplina", "Professor", "Capacidade"
+                "id", "Capacidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -444,11 +381,9 @@ public class MenuTurma extends javax.swing.JInternalFrame {
         if (jtbTurma.getColumnModel().getColumnCount() > 0) {
             jtbTurma.getColumnModel().getColumn(0).setResizable(false);
             jtbTurma.getColumnModel().getColumn(1).setResizable(false);
-            jtbTurma.getColumnModel().getColumn(2).setResizable(false);
-            jtbTurma.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 670, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 670, 240));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -456,48 +391,18 @@ public class MenuTurma extends javax.swing.JInternalFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
         try {
-            String disciplina = (String) cbxDisciplina.getSelectedItem();
-            String professor = (String) cbxProfessor.getSelectedItem();
+            
 
             int capacidade = (int) jspCapacidade.getValue();
             //nt capacidade = Integer.parseInt(capacidadeN);
             //System.out.println("Professor " + professor);
             //System.out.println("Disciplina" + disciplina);
 
-            if (disciplina == null || professor == null) {
-                throw new IllegalArgumentException("Selecione uma disciplina e um professor.");
-            }
-            /*Separar Disciplina */
-
-            //System.out.println("Sem separação" + disciplina);
-            String[] partesDisciplina = disciplina.split("-");
-            String numeroDisciplina = partesDisciplina[0];
-            String textoDisciplina = partesDisciplina[1];
-            int numeroDisciplinaConvertido = Integer.parseInt(numeroDisciplina);
-
-            //Professor
-            String[] partesProfessor = professor.split("-");
-            String numeroProfessor = partesProfessor[0];
-            String textoProfessor = partesProfessor[1];
-            int numeroProfessorConvertido = Integer.parseInt(numeroProfessor);
-
-            Professor professor1 = UsuarioController.pesquisarProfessorByNameAndId(textoProfessor, numeroProfessorConvertido);
-            Disciplina disciplina1 = DisciplinaController.pesquisarDisciplinaByNameAndId(textoDisciplina, numeroDisciplinaConvertido);
-            //System.out.println("Professor nome " + textoProfessor);
-            if (professor1 == null) {
-                throw new IllegalArgumentException("Professor  Desconhecida.");
-            } else if (disciplina1 == null) {
-                throw new IllegalArgumentException(" Disciplina Desconhecida.");
-            }
-
-            //TurmaController.autenticar(disciplina1);
-            //System.out.println(" Professor: " + professor1.getNome());
-
+            
+            
             TurmaModel turmaModel = new TurmaModel();
             turmaModel.setId(TurmaController.newIdTurma());
             turmaModel.setCapacidade(capacidade);
-            turmaModel.setProfessor(professor1);
-            turmaModel.setDisciplina(disciplina1);
 
             boolean result = TurmaController.adicionarTurma(turmaModel);
             //boolean result = false;
@@ -533,7 +438,7 @@ public class MenuTurma extends javax.swing.JInternalFrame {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Seleciona um Produto para excluir");
+            JOptionPane.showMessageDialog(null, "Seleciona uma Turma para excluir");
 
         }
     }//GEN-LAST:event_btnDelete1ActionPerformed
@@ -546,49 +451,20 @@ public class MenuTurma extends javax.swing.JInternalFrame {
                 int id = (int) tbTurma.getValueAt(jtbTurma.getSelectedRow(), 0);
                 TurmaModel turmaById = TurmaController.getTurmaById(id);
                 if (turmaById != null) {
-                    String disciplina = (String) cbxDisciplina.getSelectedItem();
-                    String professor = (String) cbxProfessor.getSelectedItem();
+                  
 
                     int capacidade = (int) jspCapacidade.getValue();
                     //nt capacidade = Integer.parseInt(capacidadeN);
                     //System.out.println("Professor " + professor);
                     //System.out.println("Disciplina" + disciplina);
 
-                    if (disciplina == null || professor == null) {
-                        throw new IllegalArgumentException("Selecione uma disciplina e um professor.");
-                    }
+                    
                     /*Separar Disciplina */
 
-                    //System.out.println("Sem separação" + disciplina);
-                    String[] partesDisciplina = disciplina.split("-");
-                    String numeroDisciplina = partesDisciplina[0];
-                    String textoDisciplina = partesDisciplina[1];
-                    int numeroDisciplinaConvertido = Integer.parseInt(numeroDisciplina);
-
-                    //Professor
-                    String[] partesProfessor = professor.split("-");
-                    String numeroProfessor = partesProfessor[0];
-                    String textoProfessor = partesProfessor[1];
-                    int numeroProfessorConvertido = Integer.parseInt(numeroProfessor);
-
-                    Professor professor1 = UsuarioController.pesquisarProfessorByNameAndId(textoProfessor, numeroProfessorConvertido);
-                    Disciplina disciplina1 = DisciplinaController.pesquisarDisciplinaByNameAndId(textoDisciplina, numeroDisciplinaConvertido);
-                    System.out.println("Professor nome " + textoProfessor);
-                    if (professor1 == null) {
-                        throw new IllegalArgumentException("Professor  Desconhecida.");
-                    } else if (disciplina1 == null) {
-                        throw new IllegalArgumentException(" Disciplina Desconhecida.");
-                    }
-                    //TurmaController.autenticar(disciplina1);
                     // TurmaController.autenticarAtualiação(disciplina1, id);
 
                     turmaById.setCapacidade(capacidade);
-                    turmaById.setProfessor(professor1);
-                    turmaById.setDisciplina(disciplina1);
-                    //jtbDisciplina.setValueAt(lbNome.getText(), jtbDisciplina.getSelectedRow(), 1);
-                    jtbTurma.setValueAt(disciplina1.getId() + "-" + disciplina1.getNome(), jtbTurma.getSelectedRow(), 1);
-                    jtbTurma.setValueAt(professor1.getId() + "-" + professor1.getNome(), jtbTurma.getSelectedRow(), 2);
-                    jtbTurma.setValueAt(capacidade, jtbTurma.getSelectedRow(), 3);
+                    
 
                     JOptionPane.showMessageDialog(null, "Atualizado Com Sucesso");
                 }
@@ -606,40 +482,10 @@ public class MenuTurma extends javax.swing.JInternalFrame {
         if (jtbTurma.getSelectedRow() != -1) {
 
             //Settar capacidade
-            int capacidade = (int) jtbTurma.getValueAt(jtbTurma.getSelectedRow(), 3);
+            int capacidade = (int) jtbTurma.getValueAt(jtbTurma.getSelectedRow(), 0);
             jspCapacidade.setValue(capacidade);
             //Pegar o valor
-            String selectedDisciplinaValue = jtbTurma.getValueAt(jtbTurma.getSelectedRow(), 1).toString();
-
-            //Verificar se temos essa Disciplina
-            boolean foundDisci = false;
-            for (int i = 0; i < cbxDisciplina.getItemCount(); i++) {
-                if (cbxDisciplina.getItemAt(i).equals(selectedDisciplinaValue)) {
-                    cbxDisciplina.setSelectedItem(selectedDisciplinaValue);
-                    foundDisci = true;
-                    break;
-                }
-
-            }
-
-            String selectedProfessorValue = jtbTurma.getValueAt(jtbTurma.getSelectedRow(), 2).toString();
-            //Verificar se temos essa Disciplina
-            boolean foundProf = false;
-            for (int i = 0; i < cbxProfessor.getItemCount(); i++) {
-                if (cbxProfessor.getItemAt(i).equals(selectedProfessorValue)) {
-                    cbxProfessor.setSelectedItem(selectedProfessorValue);
-                    foundProf = true;
-                    break;
-                }
-
-            }
-
-            if (!foundProf && !foundDisci) {
-                JOptionPane.showMessageDialog(null, "Disciplina e Professor não encotradas na combobox" + selectedProfessorValue);
-            } else if (!foundDisci) {
-                JOptionPane.showMessageDialog(null, "Disciplina  não encotrada na combobox" + selectedProfessorValue);
-
-            }
+           
             //lbNome.setText(jtbDisciplina.getValueAt(jtbDisciplina.getSelectedRow(), 1).toString());
             //lbEmenta.setText(jtbDisciplina.getValueAt(jtbDisciplina.getSelectedRow(), 2).toString());
             //cbxDisciplina.sele
@@ -650,20 +496,12 @@ public class MenuTurma extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtbTurmaMouseClicked
 
-    private void cbxDisciplinaAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxDisciplinaAncestorMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxDisciplinaAncestorMoved
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnDelete1;
-    private javax.swing.JComboBox<String> cbxDisciplina;
-    private javax.swing.JComboBox<String> cbxProfessor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jspCapacidade;
