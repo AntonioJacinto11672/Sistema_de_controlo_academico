@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import controleacademico.model.Aluno;
 import controleacademico.model.Disciplina;
 import controleacademico.model.Professor;
+import java.util.Date;
 
 /**
  *
@@ -18,15 +19,17 @@ public class TurmaModel {
 
     private int id;
     private ArrayList<Disciplina> disciplinas;
+    private ArrayList<Professor> professores;
     private int capacidade;
 
-    public TurmaModel(int id, int capacidade) {
+    public TurmaModel(int id, ArrayList<Disciplina> disciplinas, ArrayList<Professor> professores, int capacidade) {
         this.id = id;
+        this.disciplinas = disciplinas;
+        this.professores = professores;
         this.capacidade = capacidade;
     }
 
     public TurmaModel() {
-        this.disciplinas = new ArrayList<>();
     }
 
     public int getId() {
@@ -37,16 +40,44 @@ public class TurmaModel {
         this.id = id;
     }
 
-    public ArrayList<Disciplina> getDisciplina() {
+    public ArrayList<Disciplina> getDisciplinas() {
         return disciplinas;
     }
 
-    public void setDisciplina(Disciplina disciplina) {
+    public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
+
+        if (this.disciplinas != null) {
+            if (this.disciplinas.isEmpty()) {
+                //System.out.println("Entrou Mas Está vazio");
+
+                for (Disciplina dicipli : disciplinas) {
+                    this.getDisciplinas().add(dicipli);
+                    //System.out.println("Entrou Mas Está vazio ");
+
+                }
+            } else {
+
+            }
+        }
+
         if (this.disciplinas == null) {
             this.disciplinas = new ArrayList<>();
+            this.disciplinas.addAll(disciplinas);
+
+            System.out.println("Entrou no method null");
+
         }
-        
-        this.disciplinas.add(disciplina);
+
+        System.out.println("Equipamento " + this.disciplinas.size());
+
+    }
+
+    public ArrayList<Professor> getProfessores() {
+        return professores;
+    }
+
+    public void setProfessores(ArrayList<Professor> professores) {
+        this.professores = professores;
     }
 
     public int getCapacidade() {
@@ -57,4 +88,11 @@ public class TurmaModel {
         this.capacidade = capacidade;
     }
 
+    public void addDisciplina(Disciplina disciplina) {
+        System.out.println("id da turama na Model " + this.id);
+        if (disciplinas != null && !disciplinas.isEmpty()) {
+            disciplinas.add(disciplina);
+
+        }
+    }
 }

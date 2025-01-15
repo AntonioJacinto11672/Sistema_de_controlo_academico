@@ -64,10 +64,10 @@ public class TurmaController {
         ArrayList<TurmaModel> novaTurma = new ArrayList<>();
         if (prof != null) {
             for (TurmaModel turma : turmas) {
-                for(Disciplina disciplina:turma.getDisciplina())
+                /*for(Disciplina disciplina:turma.getDisciplina())
                 if (disciplina.getProfessor().getId() == prof.getId()) {
                     novaTurma.add(turma);
-                }
+                }*/
             }
             return novaTurma;
         } else {

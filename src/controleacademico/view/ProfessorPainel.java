@@ -18,6 +18,7 @@ import controleacademico.model.RendimentoEscolar;
 import controleacademico.view.pageProfessor.MenuHome;
 import controleacademico.view.pageProfessor.MenuMinhaTurma;
 import controleacademico.view.pageProfessor.MenuMedia;
+import controleacademico.view.pageProfessor.MenuTodaTurma;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class ProfessorPainel extends javax.swing.JFrame {
                 disciplina = disc;
                 //System.err.println("Disciplinas do mesmo" + disc.getNome());
             }
-            
+
             tbTurma.addRow(new Object[]{
                 turma.getId(),
                 disciplina.getNome(),
@@ -97,7 +98,7 @@ public class ProfessorPainel extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         menuMedia = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        menuMinhaTurma1 = new javax.swing.JPanel();
+        menuMinhaTodaTurma = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -203,22 +204,22 @@ public class ProfessorPainel extends javax.swing.JFrame {
         jLabel14.setText("Médias");
         menuMedia.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        menuMinhaTurma1.setBackground(new java.awt.Color(40, 40, 40));
-        menuMinhaTurma1.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuMinhaTodaTurma.setBackground(new java.awt.Color(40, 40, 40));
+        menuMinhaTodaTurma.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuMinhaTurma1MouseClicked(evt);
+                menuMinhaTodaTurmaMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menuMinhaTurma1MousePressed(evt);
+                menuMinhaTodaTurmaMousePressed(evt);
             }
         });
-        menuMinhaTurma1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        menuMinhaTodaTurma.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-classe-15.png"))); // NOI18N
         jLabel15.setText("Todas Turmas");
-        menuMinhaTurma1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        menuMinhaTodaTurma.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -233,7 +234,7 @@ public class ProfessorPainel extends javax.swing.JFrame {
                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(menuMinhaTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(menuMedia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(menuMinhaTurma1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menuMinhaTodaTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +244,7 @@ public class ProfessorPainel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menuMinhaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(menuMinhaTurma1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menuMinhaTodaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menuMedia, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
@@ -379,6 +380,8 @@ public class ProfessorPainel extends javax.swing.JFrame {
         menuHome.setBackground(ClickedColor);
         menuMinhaTurma.setBackground(DefaultColor);
         menuMedia.setBackground(DefaultColor);
+        
+       menuMinhaTodaTurma.setBackground(DefaultColor);
         lbTitleMain.setText("Página Inicial");
     }//GEN-LAST:event_menuHomeMousePressed
 
@@ -404,6 +407,8 @@ public class ProfessorPainel extends javax.swing.JFrame {
         menuHome.setBackground(DefaultColor);
         menuMinhaTurma.setBackground(ClickedColor);
         menuMedia.setBackground(DefaultColor);
+        
+       menuMinhaTodaTurma.setBackground(DefaultColor);
         lbTitleMain.setText("Minha Turma");
     }//GEN-LAST:event_menuMinhaTurmaMousePressed
 
@@ -424,16 +429,27 @@ public class ProfessorPainel extends javax.swing.JFrame {
         menuHome.setBackground(DefaultColor);
         menuMinhaTurma.setBackground(DefaultColor);
         menuMedia.setBackground(ClickedColor);
+        
+       menuMinhaTodaTurma.setBackground(DefaultColor);
         lbTitleMain.setText("Médias por Turma");
     }//GEN-LAST:event_menuMediaMousePressed
 
-    private void menuMinhaTurma1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMinhaTurma1MouseClicked
+    private void menuMinhaTodaTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMinhaTodaTurmaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuMinhaTurma1MouseClicked
+        MenuTodaTurma menuTodaTurma = new MenuTodaTurma();
+        painelMain.removeAll();
+        painelMain.add(menuTodaTurma).setVisible(true);
+    }//GEN-LAST:event_menuMinhaTodaTurmaMouseClicked
 
-    private void menuMinhaTurma1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMinhaTurma1MousePressed
+    private void menuMinhaTodaTurmaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMinhaTodaTurmaMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuMinhaTurma1MousePressed
+        menuHome.setBackground(DefaultColor);
+        menuMinhaTurma.setBackground(DefaultColor);
+        menuMedia.setBackground(DefaultColor);
+        menuMinhaTodaTurma.setBackground(ClickedColor);
+
+        lbTitleMain.setText("Médias por Turma");
+    }//GEN-LAST:event_menuMinhaTodaTurmaMousePressed
 
     /**
      * @param args the command line arguments
@@ -494,8 +510,8 @@ public class ProfessorPainel extends javax.swing.JFrame {
     private javax.swing.JLabel lbUserLogged;
     private javax.swing.JPanel menuHome;
     private javax.swing.JPanel menuMedia;
+    private javax.swing.JPanel menuMinhaTodaTurma;
     private javax.swing.JPanel menuMinhaTurma;
-    private javax.swing.JPanel menuMinhaTurma1;
     private javax.swing.JPanel painelMain;
     private javax.swing.JPanel pnTerminarSessão;
     // End of variables declaration//GEN-END:variables

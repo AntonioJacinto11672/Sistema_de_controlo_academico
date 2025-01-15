@@ -42,23 +42,10 @@ public class MenuTurmaDisciplina extends javax.swing.JInternalFrame {
             //cbxDisciplina.addItem(d.getNome());
         }
         cbxDisciplina.setModel(modeloDisciplinas);
-        /*
-        //Turma
-        DefaultComboBoxModel<String> modeloTurmas = new DefaultComboBoxModel<>();
-        for (TurmaModel  d : TurmaController.listaTodasTurma()) {
-            modeloTurmas.addElement(""+d.getId());
-            //cbxDisciplina.addItem(d.getNome());
-        }
-        cbxTurmas.setModel(modeloTurmas);
-         */
-        //cbxDisciplina.setModel(modeloDisciplinas);
 
     }
 
     private void ExibirInformacoes() {
-        //ArrayList<TurmaModel> TurmaData = TurmaController.listaTodasTurma();
-        //Aluno usuarioLogado = (Aluno) UsuarioLogadoController.getUsuarioLogado();
-        //ArrayList<RendimentoEscolar> RendimentoData = RendimentoEscolarController.getRedimentoBYAluno(usuarioLogado);
         DefaultTableModel tbTurma = (DefaultTableModel) jtbTurmaDisciplina.getModel();
         ArrayList<TurmaModel> turmaData = TurmaController.listaTodasTurma();
         tbTurma.setRowCount(0);
@@ -68,14 +55,14 @@ public class MenuTurmaDisciplina extends javax.swing.JInternalFrame {
         String nomesProfessores = "";
 
         for (TurmaModel turma : turmaData) {
-            //System.out.println("Tamanho do Array " + rendimento.getTrabalhos() == null);
+            //System.out.println("Tamanho do Array " + turma.getDisciplinas().isEmpty());
 
-            if (turma.getDisciplina() != null && !turma.getDisciplina().isEmpty()) {
-                for (Disciplina discipli : turma.getDisciplina()) {
-                    System.out.println("Length " + turma.getDisciplina().size());
+            if (turma.getDisciplinas() != null && !turma.getDisciplinas().isEmpty()) {
+                for (Disciplina discipli : turma.getDisciplinas()) {
+                    //System.out.println("Length " + turma.getDisciplinas().size());
                     if (discipli != null) {
                         disciplina = discipli;
-                        nomeDisciplina = nomeDisciplina.concat( discipli.getNome() +", ");
+                        nomeDisciplina = nomeDisciplina.concat(discipli.getNome() + ", ");
                     }
 
                 }
@@ -208,19 +195,22 @@ public class MenuTurmaDisciplina extends javax.swing.JInternalFrame {
 
             //Pegar disciplina
             String disciplina = (String) cbxDisciplina.getSelectedItem();
-            System.out.println("Int id" + idTurm);
+
             TurmaModel turmaById = TurmaController.getTurmaById(idTurm);
             Disciplina getDisciplinaByName = DisciplinaController.getDisciplinaByName(disciplina);
-            
-            if(getDisciplinaByName == null) {
+            System.out.println("Int id na view: " + turmaById.getId());
+            if (getDisciplinaByName == null) {
                 System.out.println("Disciplina  está vazia");
             }
-            
+
             if (turmaById != null) {
                 ArrayList<Disciplina> disciplinas1 = new ArrayList<>();
                 disciplinas1.add(getDisciplinaByName);
-                turmaById.setDisciplina(getDisciplinaByName);
+                //turmaById.setDisciplinas(disciplinas1);
+                System.out.println("Visualizar na própia view " + turmaById.getId());
+                turmaById.addDisciplina(getDisciplinaByName);
                 turmaById.setCapacidade(20);
+
                 JOptionPane.showMessageDialog(null, "Disciplina Vinculada Com Sucesso!");
             }
             ExibirInformacoes();

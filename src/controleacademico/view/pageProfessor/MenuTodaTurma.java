@@ -42,27 +42,56 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
         ExibirInformacoes();
 
+        DefaultComboBoxModel<String> modeloDisciplinas = new DefaultComboBoxModel<>();
+        for (Disciplina d : DisciplinaController.listaTodasDisciplina()) {
+            modeloDisciplinas.addElement(d.getNome());
+            //cbxDisciplina.addItem(d.getNome());
+        }
+        cbxDisciplina.setModel(modeloDisciplinas);
     }
 
     private void ExibirInformacoes() {
 
         //ArrayList<TurmaModel> TurmaData = TurmaController.listaTodasTurma();
-        Aluno usuarioLogado = (Aluno) UsuarioLogadoController.getUsuarioLogado();
-        ArrayList<TurmaModel> TurmaData = RendimentoEscolarController.obterTurmasNaoMatriculadas(usuarioLogado);
+        Professor usuarioLogado = (Professor) UsuarioLogadoController.getUsuarioLogado();
+        ArrayList<TurmaModel> turmaData = TurmaController.listaTodasTurma();
         DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
 
         System.out.print("Inicializou o Metodo");
         tbTurma.setRowCount(0);
 
         // Adiciona os dados filtrados ou todos os dados
-        for (TurmaModel turma : TurmaData) {
-            tbTurma.addRow(new Object[]{
-                turma.getId(),
-                turma.getDisciplina().getId() + "-" + turma.getDisciplina().getNome(),
-                turma.getProfessor().getId() + "-" + turma.getProfessor().getNome(),
-                turma.getCapacidade()
-            });
+        Disciplina disciplina = null;
+        String nomeDisciplina = "";
+        String nomeEmenta = "";
+        String nomesProfessores = "";
+
+        for (TurmaModel turma : turmaData) {
+            //System.out.println("Tamanho do Array " + rendimento.getTrabalhos() == null);
+
+            if (turma.getDisciplina() != null && !turma.getDisciplina().isEmpty()) {
+                for (Disciplina discipli : turma.getDisciplina()) {
+                    //System.out.println("Length " + turma.getDisciplina().size());
+                    if (discipli != null) {
+
+                        disciplina = discipli;
+                        nomeDisciplina = nomeDisciplina.concat(discipli.getNome() + ", ");
+                        if (discipli.getProfessor().getNome() != null) {
+                            nomesProfessores = nomesProfessores.concat(discipli.getProfessor().getNome() + ",");
+                        }
+                    }
+
+                }
+            }
+            if (! nomesProfessores.equals(usuarioLogado.getNome())) {
+                tbTurma.addRow(new Object[]{
+                    turma.getId(),
+                    nomeDisciplina,
+                    nomesProfessores,
+                    turma.getCapacidade()});
+            }
         }
+
         /*for (int i = 0; i < disciPlinaData.size(); i++) {
             jtbDisciplina.setValueAt("", i, 0);
             jtbDisciplina.setValueAt("", i, 1);
@@ -87,9 +116,12 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnMatricular = new javax.swing.JButton();
+        btnMinhaTurma = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        cbxDisciplina = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbTurma = new javax.swing.JTable();
 
@@ -97,13 +129,13 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        btnMatricular.setBackground(new java.awt.Color(0, 102, 94));
-        btnMatricular.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnMatricular.setForeground(new java.awt.Color(255, 255, 255));
-        btnMatricular.setText("Fazer Matricula");
-        btnMatricular.addActionListener(new java.awt.event.ActionListener() {
+        btnMinhaTurma.setBackground(new java.awt.Color(0, 102, 94));
+        btnMinhaTurma.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnMinhaTurma.setForeground(new java.awt.Color(255, 255, 255));
+        btnMinhaTurma.setText("Minha Turma");
+        btnMinhaTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMatricularActionPerformed(evt);
+                btnMinhaTurmaActionPerformed(evt);
             }
         });
 
@@ -112,36 +144,57 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
         jLabel4.setText("Todas as turmas");
 
         jLabel5.setFont(new java.awt.Font("Bookman Old Style", 2, 13)); // NOI18N
-        jLabel5.setText("\"Para te matriculares em uma turma Seleciona uma Turma e clica em Fazer Matricula\"");
+        jLabel5.setText("\"Para te fazeres parte de uma turma Seleciona uma Turma e clica em Minha Turma\"");
+
+        jLabel6.setFont(new java.awt.Font("Bookman Old Style", 2, 13)); // NOI18N
+        jLabel6.setText("\"Para te fazeres parte de uma turma Seleciona uma Turma e clica em Minha Turma\"");
+
+        jLabel1.setText("Seleciona a Disciplina");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMatricular, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jLabel5)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGap(107, 107, 107)
+                .addComponent(cbxDisciplina, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnMinhaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))))
+                .addGap(23, 76, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMatricular, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMinhaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel5)
-                .addContainerGap())
+                .addGap(14, 14, 14))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 668, 90));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 668, 130));
 
         jtbTurma.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 94), 1, true));
         jtbTurma.setModel(new javax.swing.table.DefaultTableModel(
@@ -372,7 +425,7 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
             jtbTurma.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 670, 280));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 670, 240));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -381,53 +434,45 @@ public class MenuTodaTurma extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtbTurmaMouseClicked
 
-    private void btnMatricularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatricularActionPerformed
+    private void btnMinhaTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinhaTurmaActionPerformed
         // TODO add your handling code here:
 
-        try {
-            DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
-            if (jtbTurma.getSelectedRow() != -1) {
-                int id = (int) tbTurma.getValueAt(jtbTurma.getSelectedRow(), 0);
-                TurmaModel turmaById = TurmaController.getTurmaById(id);
-                if (turmaById != null) {
-                    User usuarioLogado = (Aluno) UsuarioLogadoController.getUsuarioLogado();
-                    if (UsuarioLogadoController.isUsuarioLogado()) {
-                        Aluno alunoData = new Aluno(usuarioLogado.getId(), usuarioLogado.getNome(), usuarioLogado.getUserName(), usuarioLogado.getPassword(), "Aluno");
-                        //TurmaController.alunoMatriculado(alunoData, id);
-                        //boolean res = TurmaController.saveAlunoInturma(alunoData, id);
-                        //System.out.println("Usuario Logado");
-                        RendimentoEscolar RendimentoModal = new RendimentoEscolar();
-                        RendimentoModal.setAluno(alunoData);
-                        RendimentoModal.setTurma(turmaById);
-                        boolean res = RendimentoEscolarController.saveRendimentoEscolar(turmaById, RendimentoModal);
-                        System.out.println("id TUrma fora " + turmaById.getId());
-                        if (res) {
-                            ExibirInformacoes();
-                            JOptionPane.showMessageDialog(null, "Matriculado com Sucesso!: " + turmaById.getDisciplina().getNome());
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Matricula Sem Sucesso");
+        DefaultTableModel tbTurma = (DefaultTableModel) jtbTurma.getModel();
+        if (jtbTurma.getSelectedRow() != -1) {
 
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Usuario Desconhecido irá sair do Sistema");
-                    }
+            int id = (int) tbTurma.getValueAt(jtbTurma.getSelectedRow(), 0);
+            String nomeDisciplina = (String) cbxDisciplina.getSelectedItem();
+            Disciplina disciplinaById = DisciplinaController.getDisciplinaByName(nomeDisciplina);
+            if (disciplinaById != null) {
+                Professor usuarioLogado = (Professor) UsuarioLogadoController.getUsuarioLogado();
+                if (UsuarioLogadoController.isUsuarioLogado()) {
+                    disciplinaById.setProfessor(usuarioLogado);
+                    
+                    ExibirInformacoes();
+                    JOptionPane.showMessageDialog(null, "Operação efetuada com Sucesso");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario Desconhecido irá sair do Sistema");
                 }
-
             } else {
-                JOptionPane.showMessageDialog(null, "Seleciona uma Turma para Fazer a Matricula");
+                JOptionPane.showMessageDialog(null, "A Disciplina não está cadastrada nessa Turma");
             }
-        } catch (TurmaLotadaException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro no Aluno", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleciona uma Turma para Fazer a Matricula");
         }
 
 
-    }//GEN-LAST:event_btnMatricularActionPerformed
+    }//GEN-LAST:event_btnMinhaTurmaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnMatricular;
+    private javax.swing.JButton btnMinhaTurma;
+    private javax.swing.JComboBox<String> cbxDisciplina;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbTurma;

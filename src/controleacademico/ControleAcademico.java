@@ -58,30 +58,33 @@ public class ControleAcademico {
         UsuarioController.adicionarUsuario(aluno2);
 
         //Adicionar Disciplinas
-        Disciplina matematica = new Disciplina(1, "Matématica", "Algebrá e Logaritmo", professor1);
-        Disciplina cienciaComputao = new Disciplina(2, "Ciência da Computação", "Programação Java", professor2);
-        Disciplina historia = new Disciplina(3, "História", "Sobre a história de Angola", professor1);
+        Disciplina matematica = new Disciplina(1, "Matématica", "Algebrá e Logaritmo");
+        Disciplina cienciaComputao = new Disciplina(2, "Ciência da Computação", "Programação Java");
+        Disciplina historia = new Disciplina(3, "História", "Sobre a história de Angola");
 
         DisciplinaController.saveDisciplina(matematica);
         DisciplinaController.saveDisciplina(cienciaComputao);
         DisciplinaController.saveDisciplina(historia);
-
-        ArrayList<Disciplina> disciplinas1 = new ArrayList<>();
+        ArrayList<Disciplina> disciplinas = new ArrayList<>();
         ArrayList<Disciplina> disciplinas2 = new ArrayList<>();
-        ArrayList<Disciplina> disciplinas3 = new ArrayList<>();
-        disciplinas1.add(historia);
+        disciplinas.add(historia);
         disciplinas2.add(matematica);
-        disciplinas3.add(cienciaComputao);
-        TurmaModel turma1 = new TurmaModel(1, 5);
-        TurmaModel turma2 = new TurmaModel(2, 5);
+        //disciplinas.add(cienciaComputao);
+
+        ArrayList<Professor> professores = new ArrayList<>();
+        ArrayList<Professor> professores2 = new ArrayList<>();
+        professores.add(professor2);
+        professores2.add(professor1);
+
+        TurmaModel turma1 = new TurmaModel(1, disciplinas, professores, 5);
+        TurmaModel turma2 = new TurmaModel(2, disciplinas2, professores2, 5);
 
         TurmaController.adicionarTurma(turma1);
         TurmaController.adicionarTurma(turma2);
-        ArrayList<Disciplina> disciplinas4 = new ArrayList<>();
+        //ArrayList<Disciplina> disciplinas4 = new ArrayList<>();
         //disciplinas4.addAll(disciplinas4);
-        turma2.setDisciplina(matematica);
-        turma2.setDisciplina(historia);
-        turma1.setDisciplina(historia);
+        //turma1.setDisciplina(matematica);
+        //turma2.setDisciplina(historia);
 
 //Os rendimentos estão vinculados ao aluno
         int[] trabalhos = {1, 2, 3, 4};

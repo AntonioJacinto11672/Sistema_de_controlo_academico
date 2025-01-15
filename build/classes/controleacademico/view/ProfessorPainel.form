@@ -53,7 +53,7 @@
               </Group>
               <Component id="menuMinhaTurma" alignment="0" max="32767" attributes="0"/>
               <Component id="menuMedia" alignment="0" max="32767" attributes="0"/>
-              <Component id="menuMinhaTurma1" alignment="0" max="32767" attributes="0"/>
+              <Component id="menuMinhaTodaTurma" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -64,7 +64,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="menuMinhaTurma" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="menuMinhaTurma1" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="menuMinhaTodaTurma" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="menuMedia" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace pref="201" max="32767" attributes="0"/>
@@ -258,15 +258,15 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="menuMinhaTurma1">
+        <Container class="javax.swing.JPanel" name="menuMinhaTodaTurma">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="28" green="28" red="28" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuMinhaTurma1MouseClicked"/>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuMinhaTurma1MousePressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuMinhaTodaTurmaMouseClicked"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuMinhaTodaTurmaMousePressed"/>
           </Events>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">

@@ -72,7 +72,7 @@ public class RendimentoEscolar {
             this.trabalhos = new int[4];
         }
         if (trabalhos >= 0 && trabalhos <= this.trabalhos.length) {
-            System.out.println("Index no model: " + (trabalhos - 1));
+            //System.out.println("Index no model: " + (trabalhos - 1));
             this.trabalhos[trabalhos - 1] = trabalhos;
         } else {
             System.out.println("Opição invalida");
@@ -84,7 +84,7 @@ public class RendimentoEscolar {
     }
 
     public void setNotasTrabalhos(int index, float notasTrabalhos) {
-        System.out.println("Ínicio " + (index - 1) + " tamanho " + this.notasTrabalhos.length);
+        //System.out.println("Ínicio " + (index - 1) + " tamanho " + this.notasTrabalhos.length);
         if (this.notasTrabalhos.length == 0) {
             this.notasTrabalhos = new float[4];
         }
