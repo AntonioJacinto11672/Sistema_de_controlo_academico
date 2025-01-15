@@ -60,6 +60,10 @@ public class TurmaController {
                 .orElse(null);
     }
 
+    public static void atualizarTurma(TurmaModel turma, Disciplina desciplina) {
+       
+    }
+
     public static ArrayList<TurmaModel> getTurmaByProfessor(Professor prof) {
         ArrayList<TurmaModel> novaTurma = new ArrayList<>();
         if (prof != null) {
